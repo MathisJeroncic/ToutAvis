@@ -1,0 +1,1 @@
+memberSearchIndex = [{"p":"opinion","c":"Member","l":"getLogin()"},{"p":"opinion","c":"Member","l":"getPassword()"},{"p":"opinion","c":"Member","l":"getProfile()"},{"p":"opinion","c":"Member","l":"Member(String, String, String)","u":"%3Cinit%3E(java.lang.String,java.lang.String,java.lang.String)"}];updateSearchResults();
