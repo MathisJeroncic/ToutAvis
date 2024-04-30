@@ -1,5 +1,5 @@
 package opinion;
-
+//2eme Test git
 import java.util.LinkedList;
 
 import exceptions.BadEntryException;
