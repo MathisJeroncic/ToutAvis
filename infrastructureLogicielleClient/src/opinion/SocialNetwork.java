@@ -16,6 +16,7 @@ import exceptions.NotMemberException;
 public class SocialNetwork implements ISocialNetwork {
 
 	private LinkedList<Member> members;
+	private LinkedList<ItemBook> itemBooks;
 	
 	
     /**
@@ -25,6 +26,7 @@ public class SocialNetwork implements ISocialNetwork {
 	public SocialNetwork()
 	{
 		 members = new LinkedList<Member>();
+		 itemBooks = new LinkedList<ItemBook>();
 	}
 	
 	
@@ -66,17 +68,10 @@ public class SocialNetwork implements ISocialNetwork {
 		for(Member m : members) {
 			
 			if(login.trim().equalsIgnoreCase(m.getLogin())) {
-					
-				return true;
-					
-			}
-				
-		}
-			
+				return true;		
+			}		
+		}	
 		return false;
-			
-
-
 	}
 	
 	
