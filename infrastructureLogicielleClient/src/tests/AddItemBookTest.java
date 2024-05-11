@@ -9,6 +9,7 @@ import opinion.SocialNetwork;
 
 import exceptions.BadEntryException;
 import exceptions.ItemBookAlreadyExistsException;
+import exceptions.MemberAlreadyExistsException;
 import exceptions.NotTestReportException;
 import exceptions.NotMemberException;
 
@@ -164,8 +165,10 @@ public class AddItemBookTest {
      * Executes the test cases for the addItemBook method.
      *
      * @return TestReport containing the results of the tests.
+     * @throws MemberAlreadyExistsException 
+     * @throws BadEntryException 
      */
-	public static TestReport test(){
+	public static TestReport test() throws BadEntryException, MemberAlreadyExistsException{
 		
 		ISocialNetwork sn = new SocialNetwork();
 
@@ -214,7 +217,10 @@ public class AddItemBookTest {
 		// <=> test n°2
 
 		// populate 'sn' with 3 members
-
+		sn.addMember("Paul", "paul", "fan de manga");
+		sn.addMember("Antoine", "antoine", "fan de tuto");
+		sn.addMember("Janne", "uoiu", "ras");
+		
 		nbTests++;
 		nbErrors += addItemBookOKTest(sn, "Paul", "paul", "One piece", "Manga", "ODA", 50,
 				"2.1a");
@@ -222,46 +228,66 @@ public class AddItemBookTest {
 		nbErrors += addItemBookOKTest(sn, "Antoine", "antoine",
 				"code en java pour les nulls", "Tuto", "pour les nulls", 1150, "2.1b");
 		nbTests++;
-		nbErrors += addItemBookOKTest(sn, "janne", "uoiu",
+		nbErrors += addItemBookOKTest(sn, "Janne", "uoiu",
 				"reussir l'imt en 2 pages", "tuto", "Fip", 2, "2.1c");
 
-		// try to add already registered members
+		// try to add already registered book
+		
+		
 
 		nbTests++;
-		nbErrors += addItemBookAlreadyExistsTest(sn, new String("Paul"),
-				"abcdefghij", "", "2.2",
-				"The login of the first member was accepted as login for a new member");
+		nbErrors += addItemBookAlreadyExistsTest(sn,"Paul",
+				"paul", new String("One piece"),"Manga",new String("ODA"), 50, "2.2",
+				"The title and the author of the first book was accepted as title for a new book");
 		nbTests++;
-		nbErrors += addItemBookAlreadyExistsTest(sn, new String("Alice"),
-				"abcdefghij", "", "2.3",
-				"The login of the last member was accepted as login for a new member");
+		nbErrors += addItemBookAlreadyExistsTest(sn, "Janne",
+				"uoiu", new String("reussir l'imt en 2 pages"),"tuto",new String("Fip"), 2, "2.3",
+				"The title and the author of the last book was accepted as title for a new book");
 		nbTests++;
 		nbErrors += addItemBookAlreadyExistsTest(
 				sn,
-				new String("anToine"),
-				"abcdefghij",
-				"",
+				"Antoine", "antoine",
+				new String("Code En jaVa pour lEs nulls"), "Tuto", new String("pour lEs nullS"), 1150,
 				"2.4",
-				"An already registered login, but with different case, was accepted as login for a new member");
+				"An already registered book, but with different case, was accepted as title and author for a new book");
 		nbTests++;
 		nbErrors += addItemBookAlreadyExistsTest(
 				sn,
-				new String(" Antoine "),
-				"abcdefghij",
-				"",
+				"Antoine", "antoine",
+				new String("Code En jaVa pour lEs nulls "), "Tuto", new String(" pour lEs nullS"), 1150,
 				"2.5",
 				"An already registered login, surrounded by leading/trailing blanks, was accepted as login for a new member");
 		nbTests++;
 		nbErrors += addItemBookAlreadyExistsTest
 				(
 				sn,
-				"An" + "toi" + "ne",
-				"abcdefghij",
-				"",
+				"Antoine", "antoine",
+				"code"+ " en java" + " pour les nulls", "Tuto", "pour"+ "les nullS", 1150,
 				"2.6",
-				"A String concatenation building an already registered login was accepted as login for a new member");
+				"A String concatenation building an already registered book was accepted as title and author for a new book");
 
 		nbTests++;
+		
+		
+		// try to add book whit no registered member
+		nbErrors += addItemBookNotMemberTest
+				(
+				sn,
+				"Victor", "STETER",
+				"Les miserable", "Roman", "Victor hugo", 1630,
+				"3.1",
+				"The book has been added, but the member does not exist");
+		nbTests++;
+		
+		nbErrors += addItemBookNotMemberTest
+				(
+				sn,
+				"Paul", "STETER",
+				"Les miserable", "Roman", "Victor hugo", 1630,
+				"3.1",
+				"The book has been added, but the member pwr does not exist");
+		nbTests++;
+
 		// check that 'sn' was not modified
 		if (nbFilms != sn.nbFilms()) {
 			System.out
@@ -294,8 +320,10 @@ public class AddItemBookTest {
      * Main method to execute the test cases.
      *
      * @param args Command-line arguments.
+     * @throws MemberAlreadyExistsException 
+     * @throws BadEntryException 
      */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws BadEntryException, MemberAlreadyExistsException {
 		test();
 	}
 }
