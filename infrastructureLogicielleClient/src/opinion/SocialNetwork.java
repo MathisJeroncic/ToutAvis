@@ -98,7 +98,7 @@ public class SocialNetwork implements ISocialNetwork {
 			String kind, String author, int nbPages) throws BadEntryException,
 			NotMemberException, ItemBookAlreadyExistsException {
 		
-		boolean identification=true;
+		boolean identification=false;
 		
 		ItemBook itemBookToAdd=new ItemBook(title,kind,author,nbPages);
 		
@@ -108,14 +108,17 @@ public class SocialNetwork implements ISocialNetwork {
 		}
 		for (Member m : members)
 		{
-			if(m.areYou(login)) 
+			if(m.areYou(login))
 			{
-				if(m.identifyMember(members,login, password)==false)
+				if(m.identifyMember(members,login, password))
 					{
-					identification=false;
-					throw new NotMemberException("Identification manquée");
+					identification=true;
+
 					}
-				
+				else
+				{
+					throw new NotMemberException("Identification manquée");	
+				}
 				
 			}
 		}

@@ -296,6 +296,9 @@ public class AddItemBookTest {
 			nbErrors++;
 		}
 		nbTests++;
+		System.out.println("nbBooks : "+nbBooks);
+		System.out.println("sn.nbBooks : "+sn.nbBooks());
+
 		if (nbBooks != sn.nbBooks()) {
 			System.out
 					.println("Error : the number of books was unexepectedly changed by addItemBook()");
