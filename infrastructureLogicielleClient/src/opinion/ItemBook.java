@@ -17,7 +17,7 @@ public class ItemBook {
 	}
 	
 	public boolean sameBook(ItemBook book) {
-		return this.title.equalsIgnoreCase(book.title) && this.author.equalsIgnoreCase(book.author);
+		return this.title.trim().equalsIgnoreCase(book.title.trim()) && this.author.trim().equalsIgnoreCase(book.author.trim());
 	}//Return 1 if the book already exist
 	
     public String getTitle() {
@@ -38,13 +38,13 @@ public class ItemBook {
     public void checkParameters(String title, String kind, String author, int nbPages) throws BadEntryException 
     {
 
-        if (title == null || title.isEmpty()) {
+        if (title == null || title.trim().isEmpty()) {
             throw new BadEntryException("Title cant be empty");
         }
-        if (kind == null || kind.isEmpty()) {
+        if (kind == null || kind.trim().isEmpty()) {
             throw new BadEntryException("Kind cant be empty");
         }
-        if (author == null || author.isEmpty()) {
+        if (author == null || author.trim().isEmpty()) {
             throw new BadEntryException("Author cant be empty");
         }
         if (nbPages <= 0) {
