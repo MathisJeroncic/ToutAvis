@@ -98,16 +98,16 @@ public class SocialNetwork implements ISocialNetwork {
 			String kind, String author, int nbPages) throws BadEntryException,
 			NotMemberException, ItemBookAlreadyExistsException {
 		
-
+		ItemBook itemBookToAdd=new ItemBook(title,kind,author,nbPages);
 		
+		itemBookToAdd.checkParameters();
 		
-		if(title.strip().isBlank()) {throw new BadEntryException("The title is blank");}
-		if(password==null) {throw new BadEntryException("The password is null");}
-		if(password.strip().length()<4) {throw new BadEntryException("The password is smaller than 4");}
-		if(profile==null) {throw new BadEntryException("The profile is null");}
-		Member memberToAdd=new Member(login,password,profile);
-		if(areYou(login)) {throw new MemberAlreadyExistsException();}
-		members.add(memberToAdd);
+		for (ItemBook b : itemBooks)
+		{
+			if(itemBookToAdd.sameBook(b)) {throw new ItemBookAlreadyExistsException();}
+		}
+		
+		itemBooks.add(itemBookToAdd);
 
 	}
 

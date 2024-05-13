@@ -35,19 +35,19 @@ public class ItemBook {
     public int getNbPages() {
         return nbPages;
     }
-    public void checkParameters(String title, String kind, String author, int nbPages) throws BadEntryException 
+    public void checkParameters() throws BadEntryException 
     {
 
-        if (title == null || title.isEmpty()) {
+        if (this.title == null || this.title.isEmpty()) {
             throw new BadEntryException("Title cant be empty");
         }
-        if (kind == null || kind.isEmpty()) {
+        if (this.kind == null || this.kind.isEmpty()) {
             throw new BadEntryException("Kind cant be empty");
         }
-        if (author == null || author.isEmpty()) {
+        if (this.author == null || this.author.isEmpty()) {
             throw new BadEntryException("Author cant be empty");
         }
-        if (nbPages <= 0) {
+        if (this.nbPages <= 0) {
             throw new BadEntryException("Number of page cant be inferor than 0");
         }
     }
