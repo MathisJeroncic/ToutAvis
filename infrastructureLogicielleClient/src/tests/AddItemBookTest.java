@@ -221,6 +221,7 @@ public class AddItemBookTest {
 		sn.addMember("Antoine", "antoine", "fan de tuto");
 		sn.addMember("Janne", "uoiu", "ras");
 		
+		
 		nbTests++;
 		nbErrors += addItemBookOKTest(sn, "Paul", "paul", "One piece", "Manga", "ODA", 50,
 				"2.1a");
@@ -230,10 +231,10 @@ public class AddItemBookTest {
 		nbTests++;
 		nbErrors += addItemBookOKTest(sn, "Janne", "uoiu",
 				"reussir l'imt en 2 pages", "tuto", "Fip", 2, "2.1c");
-
 		// try to add already registered book
 		
-		
+		nbBooks = sn.nbBooks();
+		System.out.println(nbBooks);
 
 		nbTests++;
 		nbErrors += addItemBookAlreadyExistsTest(sn,"Paul",
@@ -262,7 +263,7 @@ public class AddItemBookTest {
 				(
 				sn,
 				"Antoine", "antoine",
-				"code"+ " en java" + " pour les nulls", "Tuto", "pour"+ "les nullS", 1150,
+				"code"+ " en java" + " pour les nulls", "Tuto", "pour"+ " les nullS", 1150,
 				"2.6",
 				"A String concatenation building an already registered book was accepted as title and author for a new book");
 
@@ -284,20 +285,20 @@ public class AddItemBookTest {
 				sn,
 				"Paul", "STETER",
 				"Les miserable", "Roman", "Victor hugo", 1630,
-				"3.1",
+				"3.2",
 				"The book has been added, but the member pwr does not exist");
 		nbTests++;
 
 		// check that 'sn' was not modified
 		if (nbFilms != sn.nbFilms()) {
 			System.out
-					.println("Error : the number of films was unexepectedly changed by addMember()");
+					.println("Error : the number of films was unexepectedly changed by addItemBook()");
 			nbErrors++;
 		}
 		nbTests++;
 		if (nbBooks != sn.nbBooks()) {
 			System.out
-					.println("Error : the number of books was unexepectedly changed by addMember()");
+					.println("Error : the number of books was unexepectedly changed by addItemBook()");
 			nbErrors++;
 		}
 
