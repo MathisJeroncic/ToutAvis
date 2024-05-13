@@ -108,8 +108,7 @@ public class SocialNetwork implements ISocialNetwork {
 		}
 		for (Member m : members)
 		{
-			if(m.areYou(login))
-			{
+
 				if(m.identifyMember(members,login, password))
 					{
 					identification=true;
@@ -120,7 +119,7 @@ public class SocialNetwork implements ISocialNetwork {
 					throw new NotMemberException("Identification manquée");	
 				}
 				
-			}
+			
 		}
 		
 		itemBookToAdd.checkParameters();
