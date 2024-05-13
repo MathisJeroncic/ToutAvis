@@ -1,4 +1,4 @@
 /**
- * Components for a simple Human-Machine Interface
+ * This package contains file for the Human-Machine Interface.
  */
 package hmi;

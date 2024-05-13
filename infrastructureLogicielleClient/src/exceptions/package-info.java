@@ -1,5 +1,5 @@
 /** 
- * Specific Exceptions for SocialNetwork
+ * This package contains all the Exceptions.
  *  
  */
 package exceptions;
