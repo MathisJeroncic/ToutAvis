@@ -1,5 +1,7 @@
 package opinion;
 
+import java.util.LinkedList;
+
 import exceptions.BadEntryException;
 import exceptions.MemberAlreadyExistsException;
 import exceptions.NotMemberException;
@@ -71,9 +73,16 @@ public class Member {
 	return (login.trim().equalsIgnoreCase(this.login.trim()));			
 	}
 	
-    public boolean identifyMember(String login,String password)
+    public boolean identifyMember(LinkedList<Member> members,String login,String password)
     {
-    	return areYou(login)&& this.password.trim().equalsIgnoreCase(password);
+    	for(Member m : members)
+    	{
+    		if(m.areYou(login)&& m.getPassword().trim().equalsIgnoreCase(password))
+    		{
+    			return true;
+    		}
+    	}
+    	return false;
     }
     
     public void checkParameters()throws BadEntryException

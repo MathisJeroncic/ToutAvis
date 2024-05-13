@@ -38,33 +38,35 @@ public class ItemBook {
     public void checkParameters() throws BadEntryException 
     {
 
-        if (title == null || title.trim().isEmpty()) {
+        if (this.title == null || this.title.trim().isEmpty()) {
             throw new BadEntryException("Title cant be empty");
         }
-        if (kind == null || kind.trim().isEmpty()) {
+        if (this.kind == null || this.kind.trim().isEmpty()) {
             throw new BadEntryException("Kind cant be empty");
         }
-        if (author == null || author.trim().isEmpty()) {
+        if (this.author == null || this.author.trim().isEmpty()) {
 
             throw new BadEntryException("Author cant be empty");
         }
         if (this.nbPages <= 0) {
             throw new BadEntryException("Number of page cant be inferor than 0");
         }
+        
+        
+        
+        if(this.title==null) {throw new BadEntryException("Title can't be null");}
+		if(this.title.strip().isBlank()) {throw new BadEntryException("Title cant be empty");}
+		
+		if(this.kind==null) {throw new BadEntryException("Kind cant be null");}
+		if(this.kind.strip().isBlank()) {throw new BadEntryException("Kind cant be empty");}
+		
+		if(this.author==null) {throw new BadEntryException("Author cant be null");}
+		if(this.author.strip().isBlank()) {throw new BadEntryException("Author cant be empty");}
+		
+		 if (this.nbPages <= 0) 
+		 {
+	            throw new BadEntryException("Number of page cant be inferor than 0");
+	     }
     }
     
-    /*
-      		if(areYou(login)==false) {throw new NotMemberException(login+" isn't a user.");}
-		
-		
-		Member m;
-		int i=0;
-		while(members.get(i).getLogin()!=login)
-		{
-			i=i+1;
-		}
-		m=members.get(i);
-		
-		if(m.getPassword()!=password){throw new BadEntryException("The password is wrong");}
-		*/
 }
