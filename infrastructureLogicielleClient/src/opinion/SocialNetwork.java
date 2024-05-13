@@ -89,8 +89,7 @@ public class SocialNetwork implements ISocialNetwork {
 
 	@Override
 	public int nbBooks() {
-		// TODO Auto-generated method stub
-		return 0;
+		return itemBooks.size();
 	}
 
 
@@ -108,7 +107,30 @@ public class SocialNetwork implements ISocialNetwork {
 	public void addItemBook(String login, String password, String title,
 			String kind, String author, int nbPages) throws BadEntryException,
 			NotMemberException, ItemBookAlreadyExistsException {
-		// TODO Auto-generated method stub
+		
+		if(login==null) {throw new BadEntryException("The login is null");}
+		
+		if(areYou(login)==false) {throw new NotMemberException(login+" isn't a user.");}
+		
+		
+		Member m;
+		int i=0;
+		while(members.get(i).getLogin()!=login)
+		{
+			i=i+1;
+		}
+		m=members.get(i);
+		
+		if(m.getPassword()!=password){throw new BadEntryException("The password is wrong");}
+		
+		
+		if(title.strip().isBlank()) {throw new BadEntryException("The title is blank");}
+		if(password==null) {throw new BadEntryException("The password is null");}
+		if(password.strip().length()<4) {throw new BadEntryException("The password is smaller than 4");}
+		if(profile==null) {throw new BadEntryException("The profile is null");}
+		Member memberToAdd=new Member(login,password,profile);
+		if(areYou(login)) {throw new MemberAlreadyExistsException();}
+		members.add(memberToAdd);
 
 	}
 
