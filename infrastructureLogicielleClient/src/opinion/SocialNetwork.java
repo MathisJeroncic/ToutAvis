@@ -46,15 +46,13 @@ public class SocialNetwork implements ISocialNetwork {
 		
 		Member memberToAdd=new Member(login,password,profile);
 		
-		memberToAdd.checkParameters()
+		memberToAdd.checkParameters();
 		
 		for (Member m : members)
 		{
 			if(memberToAdd.areYou(m.getLogin())) {throw new MemberAlreadyExistsException();}
 		}
 		members.add(memberToAdd);
-
-
 	}
 	
 	
@@ -65,8 +63,6 @@ public class SocialNetwork implements ISocialNetwork {
      * @param login Le login à vérifier.
      * @return {@code true} si le membre existe, {@code false} sinon.
      */
-	
-
 	
 	
 	@Override

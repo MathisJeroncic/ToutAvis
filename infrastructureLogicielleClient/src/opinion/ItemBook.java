@@ -1,6 +1,7 @@
 package opinion;
 
 import exceptions.BadEntryException;
+import exceptions.NotMemberException;
 
 public class ItemBook {
 	String title;
@@ -34,7 +35,8 @@ public class ItemBook {
     public int getNbPages() {
         return nbPages;
     }
-    private void checkParameters(String title, String kind, String author, int nbPages) throws BadEntryException {
+    public void checkParameters(String title, String kind, String author, int nbPages) throws BadEntryException 
+    {
 
         if (title == null || title.isEmpty()) {
             throw new BadEntryException("Title cant be empty");
@@ -49,4 +51,19 @@ public class ItemBook {
             throw new BadEntryException("Number of page cant be inferor than 0");
         }
     }
+    
+    /*
+      		if(areYou(login)==false) {throw new NotMemberException(login+" isn't a user.");}
+		
+		
+		Member m;
+		int i=0;
+		while(members.get(i).getLogin()!=login)
+		{
+			i=i+1;
+		}
+		m=members.get(i);
+		
+		if(m.getPassword()!=password){throw new BadEntryException("The password is wrong");}
+		*/
 }

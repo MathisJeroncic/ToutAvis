@@ -64,17 +64,19 @@ public class Member {
         return this.profile;
     }
     
+    
+    
 	public boolean areYou(String login) 
 	{
-	return (login.trim().equalsIgnoreCase(this.login));			
+	return (login.trim().equalsIgnoreCase(this.login.trim()));			
 	}
 	
     public boolean identifyMember(String login,String password)
     {
-    	return areYou(login)&& this.password.equalsIgnoreCase(password);
+    	return areYou(login)&& this.password.trim().equalsIgnoreCase(password);
     }
     
-    public boolean checkParameters()
+    public void checkParameters()throws BadEntryException
     {
     	
     	if(this.login==null) {throw new BadEntryException("The login is null");}
@@ -83,26 +85,7 @@ public class Member {
 		if(this.password==null) {throw new BadEntryException("The password is null");}
 		if(this.password.strip().length()<4) {throw new BadEntryException("The password is smaller than 4");}
 		
-		if(this.profile==null) {throw new BadEntryException("The profile is null");}
-		
-		
-    	
-    	
-    	
+		if(this.profile==null) {throw new BadEntryException("The profile is null");}	
 
-    	
-		
-		if(areYou(login)==false) {throw new NotMemberException(login+" isn't a user.");}
-		
-		
-		Member m;
-		int i=0;
-		while(members.get(i).getLogin()!=login)
-		{
-			i=i+1;
-		}
-		m=members.get(i);
-		
-		if(m.getPassword()!=password){throw new BadEntryException("The password is wrong");}
     }
 }
