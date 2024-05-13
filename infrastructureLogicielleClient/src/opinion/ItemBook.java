@@ -17,7 +17,7 @@ public class ItemBook {
 	
 	public boolean sameBook(ItemBook book) {
 		return this.title.equalsIgnoreCase(book.title) && this.author.equalsIgnoreCase(book.author);
-	}
+	}//Return 1 if the book already exist
 	
     public String getTitle() {
         return title;

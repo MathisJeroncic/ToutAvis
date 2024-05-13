@@ -43,13 +43,15 @@ public class SocialNetwork implements ISocialNetwork {
 	public void addMember(String login, String password, String profile)
 			throws BadEntryException, MemberAlreadyExistsException {
 		
-		if(login==null) {throw new BadEntryException("The login is null");}
-		if(login.strip().isBlank()) {throw new BadEntryException("The login is blank");}
-		if(password==null) {throw new BadEntryException("The password is null");}
-		if(password.strip().length()<4) {throw new BadEntryException("The password is smaller than 4");}
-		if(profile==null) {throw new BadEntryException("The profile is null");}
+		
 		Member memberToAdd=new Member(login,password,profile);
-		if(areYou(login)) {throw new MemberAlreadyExistsException();}
+		
+		memberToAdd.checkParameters()
+		
+		for (Member m : members)
+		{
+			if(memberToAdd.areYou(m.getLogin())) {throw new MemberAlreadyExistsException();}
+		}
 		members.add(memberToAdd);
 
 
@@ -64,15 +66,7 @@ public class SocialNetwork implements ISocialNetwork {
      * @return {@code true} si le membre existe, {@code false} sinon.
      */
 	
-	public boolean areYou(String login) {
-		for(Member m : members) {
-			
-			if(login.trim().equalsIgnoreCase(m.getLogin())) {
-				return true;		
-			}		
-		}	
-		return false;
-	}
+
 	
 	
 	@Override
@@ -108,20 +102,7 @@ public class SocialNetwork implements ISocialNetwork {
 			String kind, String author, int nbPages) throws BadEntryException,
 			NotMemberException, ItemBookAlreadyExistsException {
 		
-		if(login==null) {throw new BadEntryException("The login is null");}
-		
-		if(areYou(login)==false) {throw new NotMemberException(login+" isn't a user.");}
-		
-		
-		Member m;
-		int i=0;
-		while(members.get(i).getLogin()!=login)
-		{
-			i=i+1;
-		}
-		m=members.get(i);
-		
-		if(m.getPassword()!=password){throw new BadEntryException("The password is wrong");}
+
 		
 		
 		if(title.strip().isBlank()) {throw new BadEntryException("The title is blank");}
