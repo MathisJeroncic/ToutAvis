@@ -225,7 +225,6 @@ public class AddItemBookTest {
 		// try to add already registered book
 
 		nbBooks = sn.nbBooks();
-		System.out.println(nbBooks);
 
 		nbTests++;
 		nbErrors += addItemBookAlreadyExistsTest(sn, "Paul", "paul", new String("One piece"), "Manga",
@@ -265,8 +264,6 @@ public class AddItemBookTest {
 			nbErrors++;
 		}
 		nbTests++;
-		System.out.println("nbBooks : " + nbBooks);
-		System.out.println("sn.nbBooks : " + sn.nbBooks());
 
 		if (nbBooks != sn.nbBooks()) {
 			System.out.println("Error : the number of books was unexepectedly changed by addItemBook()");
