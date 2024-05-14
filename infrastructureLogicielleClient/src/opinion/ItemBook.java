@@ -1,6 +1,9 @@
 package opinion;
 
+import java.util.LinkedList;
+
 import exceptions.BadEntryException;
+import exceptions.NotItemException;
 import exceptions.NotMemberException;
 
 public class ItemBook {
@@ -14,6 +17,16 @@ public class ItemBook {
 		this.kind = kind;
 		this.author = author;
 		this.nbPages = nbPages;
+	}
+	
+	public LinkedList <String> consultItems(String title)
+			 throws BadEntryException{
+				return null;
+				}
+	
+	float reviewItemBook(String login,String password,String title,float mark,
+			String comment)throws BadEntryException,NotMemberException,NotItemException {
+		return 0;
 	}
 
 	public String toString() {
