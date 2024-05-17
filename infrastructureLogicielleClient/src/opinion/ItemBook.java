@@ -19,7 +19,7 @@ public class ItemBook {
 		this.nbPages = nbPages;
 	}
 	
-	public LinkedList <String> consultItems(String title)
+	public static LinkedList <String> consultItemsBook(String title)
 			 throws BadEntryException{
 				return null;
 				}

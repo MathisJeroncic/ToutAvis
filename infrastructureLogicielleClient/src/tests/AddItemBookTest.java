@@ -16,7 +16,7 @@ import exceptions.NotMemberException;
  * This class contains test methods for the addItemBook method in the
  * ISocialNetwork interface.
  */
-public class AddItemBookTest {
+public class AddItemBookTest {	
 
 	/**
 	 * Tests if addItemBook method throws BadEntryException for incorrect
