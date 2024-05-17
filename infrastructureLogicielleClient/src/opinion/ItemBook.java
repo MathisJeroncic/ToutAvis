@@ -11,23 +11,20 @@ public class ItemBook {
 	private String kind;
 	private String author;
 	private int nbPages;
+	private LinkedList<Review> reviews;
 
 	public ItemBook(String title, String kind, String author, int nbPages) {
 		this.title = title;
 		this.kind = kind;
 		this.author = author;
 		this.nbPages = nbPages;
+		reviews=new LinkedList<Review>();
 	}
 	
 	public static LinkedList <String> consultItemsBook(String title)
 			 throws BadEntryException{
 				return null;
 				}
-	
-	float reviewItemBook(String login,String password,String title,float mark,
-			String comment)throws BadEntryException,NotMemberException,NotItemException {
-		return 0;
-	}
 
 	public String toString() {
 		return ("Book title: " + this.title + "\n" + "Book kind: " + this.kind + "\n" + "Book author: " + this.author
@@ -54,6 +51,16 @@ public class ItemBook {
 	public int getNbPages() {
 		return this.nbPages;
 	}
+	
+	public LinkedList<Review> getReviews() {
+		return this.reviews;
+	}
+	
+	public int nbReviews()
+	{
+		return reviews.size();
+	}
+
 
 	public void checkParameters() throws BadEntryException {
 
