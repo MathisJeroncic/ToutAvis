@@ -81,6 +81,10 @@ public class SocialNetwork implements ISocialNetwork {
 	public int nbBooks() {
 		return itemBooks.size();
 	}
+	
+	public LinkedList<ItemBook> getBooks(){
+		return itemBooks;
+	}
 
 	@Override
 	public void addItemFilm(String login, String password, String title, String kind, String director,

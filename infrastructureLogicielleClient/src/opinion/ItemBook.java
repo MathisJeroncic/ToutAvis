@@ -32,10 +32,13 @@ public class ItemBook {
 	}
 
 	public boolean sameBook(ItemBook book) {
-		return this.title.trim().equalsIgnoreCase(book.title.trim())
-				&& this.author.trim().equalsIgnoreCase(book.author.trim());
+		return this.title.trim().equalsIgnoreCase(book.title.trim());
 	}// Return 1 if the book already exist
 
+	public boolean sameBook(String title) {
+		return this.title.trim().equalsIgnoreCase(title.trim());
+	}
+	
 	public String getTitle() {
 		return this.title;
 	}
