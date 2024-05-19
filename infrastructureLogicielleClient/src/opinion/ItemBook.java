@@ -20,11 +20,6 @@ public class ItemBook {
 		this.nbPages = nbPages;
 		reviews=new LinkedList<Review>();
 	}
-	
-	public static LinkedList <String> consultItemsBook(String title)
-			 throws BadEntryException{
-				return null;
-				}
 
 	public String toString() {
 		return ("Book title: " + this.title + "\n" + "Book kind: " + this.kind + "\n" + "Book author: " + this.author

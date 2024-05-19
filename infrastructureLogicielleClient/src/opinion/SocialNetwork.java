@@ -141,7 +141,46 @@ public class SocialNetwork implements ISocialNetwork {
 
 	@Override
 	public LinkedList<String> consultItems(String title) throws BadEntryException {
-		return new LinkedList<String>();
+		
+		LinkedList<Review> reviews=new LinkedList<Review>();
+		LinkedList<String> consultedItemReviews=new LinkedList<String>();
+		
+		String login;
+		float mark;
+		String comment;
+	
+		
+		if (title == null || title.trim().isEmpty()) {
+			throw new BadEntryException("Title cant be null");
+		}
+		if (title.strip().isBlank()) {
+			throw new BadEntryException("Title cant be empty");
+		}
+		
+		if (title.length() < 1) {
+			throw new BadEntryException("Title can't be inferior to 1");
+		}
+		
+		
+		for (ItemBook b : itemBooks) 
+		{
+			if (b.getTitle()==title) 
+			{
+				reviews=b.getReviews();
+				
+				for(Review r : reviews)
+				{
+					login=r.getLogin();
+					mark=r.getMark();
+					comment=r.getComment();
+					consultedItemReviews.add(login+" a donne a "+title+" la note de "+mark+" avec comme commentaire : "+comment);
+				}
+
+				return consultedItemReviews;
+			}
+		}
+		return null;
+		
 	}
 
 	/**
