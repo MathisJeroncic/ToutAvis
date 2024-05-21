@@ -81,8 +81,8 @@ public class SocialNetwork implements ISocialNetwork {
 	public int nbBooks() {
 		return itemBooks.size();
 	}
-	
-	public LinkedList<ItemBook> getBooks(){
+
+	public LinkedList<ItemBook> getBooks() {
 		return itemBooks;
 	}
 
@@ -119,7 +119,6 @@ public class SocialNetwork implements ISocialNetwork {
 		}
 
 		itemBookToAdd.checkParameters();
-
 		if (identification == true) {
 			itemBooks.add(itemBookToAdd);
 		}
@@ -135,52 +134,96 @@ public class SocialNetwork implements ISocialNetwork {
 	@Override
 	public float reviewItemBook(String login, String password, String title, float mark, String comment)
 			throws BadEntryException, NotMemberException, NotItemException {
-		// TODO Auto-generated method stub
-		return 0;
+
+		boolean identification = false;
+		boolean replace = false;
+		ItemBook bookReviewsAdd = null;
+		Review reviewsRemplace = null;
+		float totalmark = 0;
+
+		Review reviewItemBookToAdd = new Review(login, title, mark, comment);
+
+		for (ItemBook b : getBooks()) {
+			if (b.sameBook(title)) {
+				bookReviewsAdd = b;
+				LinkedList<Review> reviewList = b.getReviews();
+				for (Review r : reviewList) {
+					if (r.sameLogin(login)) {
+						reviewsRemplace = r;
+						replace = true;
+					}
+				}
+			}else {
+				throw new NotItemException("the Book "+title+" do not existe in the data base please add it.");
+			}
+		}
+
+		for (Member m : members) {
+
+			if (m.identifyMember(members, login, password)) {
+				identification = true;
+
+			} else {
+				throw new NotMemberException("Identification manquée");
+			}
+
+		}
+		reviewItemBookToAdd.checkParameters();
+		if (identification) {
+			if (replace) {
+				reviewsRemplace.replacReview(mark, comment);
+			} else {
+				bookReviewsAdd.addReviews(reviewItemBookToAdd);
+			}
+		}
+		
+		if (bookReviewsAdd != null) {
+			LinkedList<Review> reviewList = bookReviewsAdd.getReviews();
+			for (Review r : reviewList) {
+				totalmark = totalmark + r.getMark();
+			}
+			return (totalmark / reviewList.size());
+		}else return 0;
 	}
 
 	@Override
 	public LinkedList<String> consultItems(String title) throws BadEntryException {
-		
-		LinkedList<Review> reviews=new LinkedList<Review>();
-		LinkedList<String> consultedItemReviews=new LinkedList<String>();
-		
+
+		LinkedList<Review> reviews = new LinkedList<Review>();
+		LinkedList<String> consultedItemReviews = new LinkedList<String>();
+
 		String login;
 		float mark;
 		String comment;
-	
-		
+
 		if (title == null || title.trim().isEmpty()) {
 			throw new BadEntryException("Title cant be null");
 		}
 		if (title.strip().isBlank()) {
 			throw new BadEntryException("Title cant be empty");
 		}
-		
+
 		if (title.length() < 1) {
 			throw new BadEntryException("Title can't be inferior to 1");
 		}
-		
-		
-		for (ItemBook b : itemBooks) 
-		{
-			if (b.getTitle()==title) 
-			{
-				reviews=b.getReviews();
-				
-				for(Review r : reviews)
-				{
-					login=r.getLogin();
-					mark=r.getMark();
-					comment=r.getComment();
-					consultedItemReviews.add(login+" a donne a "+title+" la note de "+mark+" avec comme commentaire : "+comment);
+
+		for (ItemBook b : itemBooks) {
+			if (b.getTitle() == title) {
+				reviews = b.getReviews();
+
+				for (Review r : reviews) {
+					login = r.getLogin();
+					mark = r.getMark();
+					comment = r.getComment();
+					consultedItemReviews.add(login + " a donne a " + title + " la note de " + mark
+							+ " avec comme commentaire : " + comment);
 				}
 
 				return consultedItemReviews;
 			}
 		}
 		return null;
-		
+
 	}
 
 	/**

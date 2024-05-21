@@ -58,6 +58,10 @@ public class ItemBook {
 	{
 		return reviews.size();
 	}
+	
+	public void addReviews(Review reviewToAdd) {
+		reviews.add(reviewToAdd);
+	}
 
 
 	public void checkParameters() throws BadEntryException {
@@ -72,31 +76,6 @@ public class ItemBook {
 
 			throw new BadEntryException("Author cant be empty");
 		}
-		if (this.nbPages <= 0) {
-			throw new BadEntryException("Number of page cant be inferor than 0");
-		}
-
-		if (this.title == null) {
-			throw new BadEntryException("Title can't be null");
-		}
-		if (this.title.strip().isBlank()) {
-			throw new BadEntryException("Title cant be empty");
-		}
-
-		if (this.kind == null) {
-			throw new BadEntryException("Kind cant be null");
-		}
-		if (this.kind.strip().isBlank()) {
-			throw new BadEntryException("Kind cant be empty");
-		}
-
-		if (this.author == null) {
-			throw new BadEntryException("Author cant be null");
-		}
-		if (this.author.strip().isBlank()) {
-			throw new BadEntryException("Author cant be empty");
-		}
-
 		if (this.nbPages <= 0) {
 			throw new BadEntryException("Number of page cant be inferor than 0");
 		}

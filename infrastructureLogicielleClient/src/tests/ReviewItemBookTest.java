@@ -32,7 +32,9 @@ public class ReviewItemBookTest {
 			System.out.println("Err " + testId + " : " + errorMessage);
 			return 1;
 		}catch (BadEntryException e) {
-			if (bookToMark.nbReviews() != nbReviews) {
+			if (bookToMark == null) {
+				return 0;
+			}else if(bookToMark.nbReviews() != nbReviews) {
 				System.out.println("Err " + testId + " : BadEntry was thrown but the number of review was changed");
 				return 1;
 			} else
@@ -58,7 +60,7 @@ public class ReviewItemBookTest {
 		}
 		try {
 			sn.reviewItemBook(login, password, title, mark, comment);
-			if (bookToMark.nbReviews() != nbReviews) {
+			if (bookToMark.nbReviews() != nbReviews + 1) {
 				System.out.println("Err " + testId + " : the number of review was not incremented");
 				return 1;
 			} else
@@ -87,7 +89,9 @@ public class ReviewItemBookTest {
 			System.out.println("Err " + testId + " : " + errorMessage);
 			return 1;
 		} catch (NotMemberException e) {
-			if (bookToMark.nbReviews() != nbReviews) {
+			if (bookToMark == null) {
+				return 0;
+			}else if(bookToMark.nbReviews() != nbReviews) {
 				System.out.println(
 						"Err " + testId + " : NotMemberException was thrown, but the number of review"
 								+ ""
@@ -119,7 +123,9 @@ public class ReviewItemBookTest {
 			System.out.println("Err " + testId + " : " + errorMessage);
 			return 1;
 		} catch (NotItemException e) {
-			if (bookToMark.nbReviews() != nbReviews) {
+			if (bookToMark == null) {
+				return 0;
+			}else if(bookToMark.nbReviews() != nbReviews) {
 				System.out.println(
 						"Err " + testId + " : NotItemException was thrown, but the number of review"
 								+ ""
@@ -160,8 +166,8 @@ public class ReviewItemBookTest {
 		nbErrors += reviewItemBookTestBadEntryTest(sn, "test", "qsdfgh", "", 2,"commentaire", "1.2",
 				"Review() doesn't reject title that don't contain at least one character other than space");
 		nbTests++;
-		nbErrors += reviewItemBookTestBadEntryTest(sn, "test", "qsdfgh", "titre", 6, "commentaire", "1.3",
-				"Review() doesn't reject mark superore than 5.0");
+		nbErrors += reviewItemBookTestBadEntryTest(sn, "test", "qsdfgh", "titre", (float) 6.0, "commentaire", "1.3",
+				"Review() doesn't reject mark superor than 5.0");
 		nbTests++;
 		nbErrors += reviewItemBookTestBadEntryTest(sn, "test", "qsdfgh", "test", 4, "", "1.4",
 				"Review() doesn't reject null comment");
@@ -178,11 +184,11 @@ public class ReviewItemBookTest {
 		sn.addItemBook("Paul", "paul", "One piece", "Manga", "ODA", 50);
 
 		nbTests++;
-		nbErrors += reviewItemBookOKTest(sn, "Paul", "paul", "One piece", 5, "Cool Manga", "2.1a");
+		nbErrors += reviewItemBookOKTest(sn, "Paul", "paul", "One piece",(float) 5.0, "Cool Manga", "2.1a");
 		nbTests++;
-		nbErrors += reviewItemBookOKTest(sn, "Antoine", "antoine", "One piece", 2, "Verry long", "2.1b");
+		nbErrors += reviewItemBookOKTest(sn, "Antoine", "antoine", "One piece", (float) 0.0, "Verry long", "2.1b");
 		nbTests++;
-		nbErrors += reviewItemBookOKTest(sn, "Janne", "uoiu", "One piece", 3, "middle", "2.1c");
+		nbErrors += reviewItemBookOKTest(sn, "Janne", "uoiu", "One piece",(float) 3.2, "middle", "2.1c");
 		// try to add already registered book
 		
 		nbBooks = sn.nbBooks();

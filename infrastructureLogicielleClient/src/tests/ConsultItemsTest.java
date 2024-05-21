@@ -16,19 +16,15 @@ public class ConsultItemsTest {
 
 	private static int consultItemsBadEntryTest(ISocialNetwork sn, String title, String testId, String errorMessage) {
 
-		LinkedList<String> reviews = new LinkedList<String>();
 		try {
-			reviews = sn.consultItems(title);
+			sn.consultItems(title);
 			System.out.println("Err " + testId + " : " + errorMessage);
 			return 1;
 		}
 
 		catch (BadEntryException e) {
-			if (true) {
-				System.out.println("Err " + testId + " : BadEntry was thrown but the number of books was changed");
-				return 1;
-			} else
-				return 0;
+			System.out.println("Err " + testId + " : BadEntry was thrown but the number of books was changed");
+			return 1;
 		} catch (Exception e) {
 			System.out.println("Err " + testId + " : unexpected exception. " + e);
 			e.printStackTrace();
