@@ -182,8 +182,7 @@ public class SocialNetwork implements ISocialNetwork {
 		LinkedList<Review> reviews = new LinkedList<Review>();
 		LinkedList<String> consultedItemReviews = new LinkedList<String>();
 
-		String login;
-		float mark;
+		float mark=0.0f;
 		String comment;
 
 		if (title == null || title.trim().isEmpty()) {
@@ -202,17 +201,16 @@ public class SocialNetwork implements ISocialNetwork {
 				reviews = b.getReviews();
 
 				for (Review r : reviews) {
-					login = r.getLogin();
-					mark = r.getMark();
+					mark += r.getMark();
 					comment = r.getComment();
-					consultedItemReviews.add(login + " a donne a " + title + " la note de " + mark
-							+ " avec comme commentaire : " + comment);
+					
 				}
-
-				return consultedItemReviews;
+				mark=mark/b.nbReviews();
+				
+				consultedItemReviews.add(b.getTitle()+"est un livre écrit par "+b.getAuthor()+" dans le style "+b.getKind()+" avec "+b.getNbPages()+" pages et qui a reçu pour note "+mark+"/5");
 			}
 		}
-		return null;
+		return consultedItemReviews;
 
 	}
 
