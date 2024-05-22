@@ -14,7 +14,7 @@ import exceptions.NotItemException;
 
 public class ConsultItemsTest {
 
-	private static int consultItemsBadEntryTest(ISocialNetwork sn, String title, String testId, String errorMessage) {
+	private static int consultItemsBadEntryTest(ISocialNetwork sn, String title, String testId, String errorMessage)throws BadEntryException {
 
 		try {
 			sn.consultItems(title);
@@ -33,6 +33,22 @@ public class ConsultItemsTest {
 
 	}
 	
+	private static int consultItemsOkTest(ISocialNetwork sn, String title, String testId, String errorMessage) {
+
+		try {
+			sn.consultItems(title);
+			System.out.println("Err " + testId + " : " + errorMessage);
+			return 1;
+		}
+
+		catch (Exception e) {
+			System.out.println("Err " + testId + " : unexpected exception. " + e);
+			e.printStackTrace();
+			return 1;
+		}
+
+	}
+	
 
 	public static TestReport test() throws BadEntryException {
 
@@ -44,10 +60,10 @@ public class ConsultItemsTest {
 		System.out.println("Testing consultItems()");
 
 		nbTests++;
-		nbErrors += consultItemsBadEntryTest(sn,"Harry Potter","1.1","Ne peut pas consulter un item");
+		nbErrors += consultItemsOkTest(sn,"Harry Potter","1.1","Ne peut pas consulter un item");
 
 		nbTests++;
-		nbErrors += consultItemsBadEntryTest(sn,"Harry Potter","1.2","Ne peut pas consulter deux fois le même item");
+		nbErrors += consultItemsOkTest(sn,"Harry Potter","1.2","Ne peut pas consulter deux fois le même item");
 
 		nbTests++;
 		nbErrors += consultItemsBadEntryTest(sn,"Hp","1.3","Ne peut pas consulter un item de 2 charactères");
