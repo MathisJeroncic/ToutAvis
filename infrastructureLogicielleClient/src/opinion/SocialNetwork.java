@@ -137,26 +137,7 @@ public class SocialNetwork implements ISocialNetwork {
 
 		boolean identification = false;
 		boolean replace = false;
-		ItemBook bookReviewsAdd = null;
-		Review reviewsReplace = null;
 		float totalmark = 0;
-
-		Review reviewItemBookToAdd = new Review(login, title, mark, comment);
-
-		for (ItemBook b : getBooks()) {
-			if (b.sameBook(title)) {
-				bookReviewsAdd = b;
-				LinkedList<Review> reviewList = b.getReviews();
-				for (Review r : reviewList) {
-					if (r.sameLogin(login)) {
-						reviewsReplace = r;
-						replace = true;
-					}
-				}
-			}else {
-				throw new NotItemException("the Book "+title+" do not existe in the data base please add it.");
-			}
-		}
 
 		for (Member m : members) {
 
@@ -168,22 +149,31 @@ public class SocialNetwork implements ISocialNetwork {
 			}
 
 		}
+
+		Review reviewItemBookToAdd = new Review(login, title, mark, comment);
 		reviewItemBookToAdd.checkParameters();
-		if (identification) {
-			if (replace) {
-				reviewsReplace.replacReview(mark, comment);
-			} else {
-				bookReviewsAdd.addReviews(reviewItemBookToAdd);
+		for (ItemBook b : getBooks()) {
+			if (identification) {
+				if (b.sameBook(title)) {
+					LinkedList<Review> reviewList = b.getReviews();
+					for (Review r : reviewList) {
+						totalmark = totalmark + r.getMark();
+						if (r.sameLogin(login)) {
+							replace = true;
+							r.replacReview(mark, comment);
+							return (totalmark / reviewList.size());
+						}
+					}
+					if (replace != true) {
+						b.addReviews(reviewItemBookToAdd);
+						return ((totalmark+mark) / reviewList.size());
+					}
+				} else {
+					throw new NotItemException("the Book " + title + " do not existe in the data base please add it.");
+				}
 			}
 		}
-		
-		if (bookReviewsAdd != null) {
-			LinkedList<Review> reviewList = bookReviewsAdd.getReviews();
-			for (Review r : reviewList) {
-				totalmark = totalmark + r.getMark();
-			}
-			return (totalmark / reviewList.size());
-		}else return 0;
+		return 0;
 	}
 
 	@Override
