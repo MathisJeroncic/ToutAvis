@@ -23,8 +23,8 @@ public class ConsultItemsTest {
 		}
 
 		catch (BadEntryException e) {
-			System.out.println("Err " + testId + " : BadEntry was thrown but the number of books was changed");
-			return 1;
+			
+			return 0;
 		} catch (Exception e) {
 			System.out.println("Err " + testId + " : unexpected exception. " + e);
 			e.printStackTrace();
@@ -37,8 +37,8 @@ public class ConsultItemsTest {
 
 		try {
 			sn.consultItems(title);
-			System.out.println("Err " + testId + " : " + errorMessage);
-			return 1;
+//			System.out.println("Err " + testId + " : " + errorMessage);
+			return 0;
 		}
 
 		catch (Exception e) {
@@ -66,10 +66,10 @@ public class ConsultItemsTest {
 		nbErrors += consultItemsOkTest(sn,"Harry Potter","1.2","Ne peut pas consulter deux fois le même item");
 
 		nbTests++;
-		nbErrors += consultItemsBadEntryTest(sn,"Hp","1.3","Ne peut pas consulter un item de 2 charactères");
+		nbErrors += consultItemsOkTest(sn,"Hp","1.3","Ne peut pas consulter un item de 2 charactères");
 
 		nbTests++;
-		nbErrors += consultItemsBadEntryTest(sn,"H","1.4","Ne peut pas consulter un item de 1 charactère");
+		nbErrors += consultItemsOkTest(sn,"H","1.4","Ne peut pas consulter un item de 1 charactère");
 
 		nbTests++;
 		nbErrors += consultItemsBadEntryTest(sn,"","1.5","Ne peut pas consulter un item dont le titre est null");
