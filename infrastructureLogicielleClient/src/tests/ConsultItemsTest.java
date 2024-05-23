@@ -70,14 +70,14 @@ public class ConsultItemsTest {
 		sn.reviewItemBook("Paul", "paul","Harry Potter",(float)  3.2, "after a second read is not that good");
 
 		nbTests++;
-		nbErrors += consultItemsOkTest(sn,"Harry Potter","1.1");
+		nbErrors += consultItemsBadEntryTest(sn,null,"1.1","consultItems() doesn't reject null title");
+
+		nbTests++;
+		nbErrors += consultItemsBadEntryTest(sn," ","1.2","consultItems() doesn't reject title that don't contain at least one character other than space");
 		
 		nbTests++;
-		nbErrors += consultItemsBadEntryTest(sn,null,"2.1","consultItems() doesn't reject null title");
-
-		nbTests++;
-		nbErrors += consultItemsBadEntryTest(sn," ","2.2","consultItems() doesn't reject title that don't contain at least one character other than space");
-
+		nbErrors += consultItemsOkTest(sn,"Harry Potter","2.1");
+		
 
 		try {
 			TestReport tr = new TestReport(nbTests, nbErrors);
