@@ -183,18 +183,11 @@ public class SocialNetwork implements ISocialNetwork {
 		LinkedList<String> consultedItemReviews = new LinkedList<String>();
 
 		float mark=0.0f;
-		String comment;
 
 		if (title == null || title.trim().isEmpty()) {
 			throw new BadEntryException("Title cant be null");
 		}
-		if (title.strip().isBlank()) {
-			throw new BadEntryException("Title cant be empty");
-		}
 
-		if (title.length() < 1) {
-			throw new BadEntryException("Title can't be inferior to 1");
-		}
 
 		for (ItemBook b : itemBooks) {
 			if (b.getTitle() == title) {
@@ -202,7 +195,6 @@ public class SocialNetwork implements ISocialNetwork {
 
 				for (Review r : reviews) {
 					mark += r.getMark();
-					comment = r.getComment();
 					
 				}
 				mark=mark/b.nbReviews();
