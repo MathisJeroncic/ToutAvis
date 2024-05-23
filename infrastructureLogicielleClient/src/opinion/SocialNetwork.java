@@ -137,7 +137,7 @@ public class SocialNetwork implements ISocialNetwork {
 
 		boolean identification = false;
 		boolean replace = false;
-		float totalmark = 0;
+		float Mean = 0.0f;
 
 		for (Member m : members) {
 
@@ -157,23 +157,20 @@ public class SocialNetwork implements ISocialNetwork {
 				if (b.sameBook(title)) {
 					LinkedList<Review> reviewList = b.getReviews();
 					for (Review r : reviewList) {
-						totalmark = totalmark + r.getMark();
 						if (r.sameLogin(login)) {
 							replace = true;
 							r.replacReview(mark, comment);
-							return (totalmark / reviewList.size());
+							return (b.getMean());
 						}
 					}
-					if (replace != true) {
-						b.addReviews(reviewItemBookToAdd);
-						return ((totalmark+mark) / reviewList.size());
-					}
-				} else {
+					b.addReviews(reviewItemBookToAdd);
+					return (b.getMean());
+					}else {
 					throw new NotItemException("the Book " + title + " do not existe in the data base please add it.");
 				}
 			}
 		}
-		return 0;
+		return Mean;
 	}
 
 	@Override

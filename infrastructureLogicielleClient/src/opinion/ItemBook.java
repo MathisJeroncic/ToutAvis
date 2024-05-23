@@ -62,6 +62,14 @@ public class ItemBook {
 	public void addReviews(Review reviewToAdd) {
 		reviews.add(reviewToAdd);
 	}
+	
+	public float getMean() {
+		float mark = 0.0f;
+		for (Review r : reviews) {
+			mark += r.getMark();
+		}
+		return(mark/reviews.size());
+	}
 
 
 	public void checkParameters() throws BadEntryException {
