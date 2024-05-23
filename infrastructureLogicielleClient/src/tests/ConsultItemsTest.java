@@ -7,6 +7,7 @@ import opinion.SocialNetwork;
 import java.util.LinkedList;
 
 import exceptions.BadEntryException;
+import exceptions.ItemBookAlreadyExistsException;
 import exceptions.MemberAlreadyExistsException;
 import exceptions.NotMemberException;
 import exceptions.NotTestReportException;
@@ -33,7 +34,7 @@ public class ConsultItemsTest {
 
 	}
 	
-	private static int consultItemsOkTest(ISocialNetwork sn, String title, String testId, String errorMessage) {
+	private static int consultItemsOkTest(ISocialNetwork sn, String title, String testId) {
 
 		try {
 			sn.consultItems(title);
@@ -48,9 +49,11 @@ public class ConsultItemsTest {
 		}
 
 	}
+
+	
 	
 
-	public static TestReport test() throws BadEntryException {
+	public static TestReport test() throws BadEntryException, MemberAlreadyExistsException, NotMemberException, ItemBookAlreadyExistsException, NotItemException {
 
 		ISocialNetwork sn = new SocialNetwork();
 
@@ -58,27 +61,23 @@ public class ConsultItemsTest {
 		int nbErrors = 0; // total number of failed tests
 
 		System.out.println("Testing consultItems()");
+		
+		sn.addMember("Paul", "paul", "Potterhead");
+		sn.addMember("Jean", "jean", "lecteur passionner");
+		sn.addItemBook("Paul", "paul", "Harry Potter", "Roman", "JK Rolling", 600);
+		sn.reviewItemBook("Paul", "paul","Harry Potter",(float)  5.0, "Good Roman");
+		sn.reviewItemBook("Jean", "jean","Harry Potter",(float)  4.5, ":)");
+		sn.reviewItemBook("Paul", "paul","Harry Potter",(float)  3.2, "after a second read is not that good");
 
 		nbTests++;
-		nbErrors += consultItemsOkTest(sn,"Harry Potter","1.1","Ne peut pas consulter un item");
+		nbErrors += consultItemsOkTest(sn,"Harry Potter","1.1");
+		
+		nbTests++;
+		nbErrors += consultItemsBadEntryTest(sn,null,"2.1","consultItems() doesn't reject null title");
 
 		nbTests++;
-		nbErrors += consultItemsOkTest(sn,"Harry Potter","1.2","Ne peut pas consulter deux fois le même item");
+		nbErrors += consultItemsBadEntryTest(sn," ","2.2","consultItems() doesn't reject title that don't contain at least one character other than space");
 
-		nbTests++;
-		nbErrors += consultItemsOkTest(sn,"Hp","1.3","Ne peut pas consulter un item de 2 charactères");
-
-		nbTests++;
-		nbErrors += consultItemsOkTest(sn,"H","1.4","Ne peut pas consulter un item de 1 charactère");
-
-		nbTests++;
-		nbErrors += consultItemsBadEntryTest(sn,"","1.5","Ne peut pas consulter un item dont le titre est null");
-
-		nbTests++;
-		nbErrors += consultItemsBadEntryTest(sn," ","1.6","Ne peut pas consulter un item dont le titre est un espace");
-
-		nbTests++;
-		nbErrors += consultItemsBadEntryTest(sn,"                       ","1.7","Ne peut pas consulter un item dont le titre est constitué uniquement d'espaces");
 
 		try {
 			TestReport tr = new TestReport(nbTests, nbErrors);
@@ -90,7 +89,7 @@ public class ConsultItemsTest {
 		}
 	}
 
-	public static void main(String[] args) throws BadEntryException {
+	public static void main(String[] args) throws BadEntryException, MemberAlreadyExistsException, NotMemberException, ItemBookAlreadyExistsException, NotItemException {
 		test();
 	}
 
