@@ -159,7 +159,7 @@ public class SocialNetwork implements ISocialNetwork {
 					for (Review r : reviewList) {
 						if (r.sameLogin(login)) {
 							replace = true;
-							r.replacReview(mark, comment);
+							r.replaceReview(mark, comment);
 							return (b.getMean());
 						}
 					}

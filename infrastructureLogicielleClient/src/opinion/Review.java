@@ -35,7 +35,7 @@ public class Review {
 		return this.login.trim().equalsIgnoreCase(login.trim());
 	}
 
-	public void replacReview(float mark, String comment) {
+	public void replaceReview(float mark, String comment) {
 		this.mark = mark;
 		this.comment = comment;
 	}

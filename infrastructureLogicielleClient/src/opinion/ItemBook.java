@@ -12,6 +12,7 @@ public class ItemBook {
 	private String author;
 	private int nbPages;
 	private LinkedList<Review> reviews;
+	private float meanMark;
 
 	public ItemBook(String title, String kind, String author, int nbPages) {
 		this.title = title;
@@ -68,7 +69,8 @@ public class ItemBook {
 		for (Review r : reviews) {
 			mark += r.getMark();
 		}
-		return(mark/reviews.size());
+		this.meanMark=mark/reviews.size();
+		return this.meanMark;
 	}
 
 
