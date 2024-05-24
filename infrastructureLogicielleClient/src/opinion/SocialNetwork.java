@@ -136,7 +136,6 @@ public class SocialNetwork implements ISocialNetwork {
 			throws BadEntryException, NotMemberException, NotItemException {
 
 		boolean identification = false;
-		boolean replace = false;
 		float Mean = 0.0f;
 
 		for (Member m : members) {
@@ -158,7 +157,6 @@ public class SocialNetwork implements ISocialNetwork {
 					LinkedList<Review> reviewList = b.getReviews();
 					for (Review r : reviewList) {
 						if (r.sameLogin(login)) {
-							replace = true;
 							r.replaceReview(mark, comment);
 							return (b.getMean());
 						}
