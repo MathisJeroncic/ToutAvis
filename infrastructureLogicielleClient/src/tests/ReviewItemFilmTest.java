@@ -219,7 +219,7 @@ public class ReviewItemFilmTest {
 		nbErrors += reviewItemFilmNotMemberTest(sn, "Paul", "STETER", "One piece", 5, "Cool Manga", "2.3",
 				"The review has been added, but the member password is incorrect");
 		nbTests++;
-		nbErrors += reviewItemFilmNotMemberTest(sn, "Paul", "paul", "Miserable", 1, "so long", "2.4",
+		nbErrors += reviewItemFilmNotItemTest(sn, "Paul", "paul", "Miserable", 1, "so long", "2.4",
 				"The review has been added, but the book does not exist");
 		nbTests++;
 
