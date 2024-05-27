@@ -1,5 +1,5 @@
 package opinion;
 
-public class ItemFilm {
+public class ItemFilm extends Item{
 
 }

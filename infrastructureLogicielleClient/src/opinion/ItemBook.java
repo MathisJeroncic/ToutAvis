@@ -6,17 +6,16 @@ import exceptions.BadEntryException;
 import exceptions.NotItemException;
 import exceptions.NotMemberException;
 
-public class ItemBook {
-	private String title;
-	private String kind;
+public class ItemBook extends Item {
+	
 	private String author;
 	private int nbPages;
-	private LinkedList<Review> reviews;
-	private float meanMark;
+
 
 	public ItemBook(String title, String kind, String author, int nbPages) {
-		this.title = title;
-		this.kind = kind;
+		
+		super(title,kind);
+		
 		this.author = author;
 		this.nbPages = nbPages;
 		reviews=new LinkedList<Review>();
@@ -34,14 +33,6 @@ public class ItemBook {
 	public boolean sameBook(String title) {
 		return this.title.trim().equalsIgnoreCase(title.trim());
 	}
-	
-	public String getTitle() {
-		return this.title;
-	}
-
-	public String getKind() {
-		return this.kind;
-	}
 
 	public String getAuthor() {
 		return this.author;
@@ -51,29 +42,6 @@ public class ItemBook {
 		return this.nbPages;
 	}
 	
-	public LinkedList<Review> getReviews() {
-		return this.reviews;
-	}
-	
-	public int nbReviews()
-	{
-		return reviews.size();
-	}
-	
-	public void addReviews(Review reviewToAdd) {
-		reviews.add(reviewToAdd);
-	}
-	
-	public float getMean() {
-		float mark = 0.0f;
-		for (Review r : reviews) {
-			mark += r.getMark();
-		}
-		this.meanMark=mark/reviews.size();
-		return this.meanMark;
-	}
-
-
 	public void checkParameters() throws BadEntryException 
 	{
 
