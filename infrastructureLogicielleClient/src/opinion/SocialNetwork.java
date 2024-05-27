@@ -155,8 +155,40 @@ public class SocialNetwork implements ISocialNetwork {
 	@Override
 	public float reviewItemFilm(String login, String password, String title, float mark, String comment)
 			throws BadEntryException, NotMemberException, NotItemException {
-		// TODO Auto-generated method stub
-		return 0;
+
+		boolean identification = false;
+		float Mean = 0.0f;
+
+		for (Member m : members) {
+
+			if (m.identifyMember(members, login, password)) {
+				identification = true;
+
+			} else {
+				throw new NotMemberException("Identification manquée");
+			}
+
+		}
+		Review reviewItemFilmAdded = new Review(login, title, mark, comment);
+		reviewItemFilmAdded.checkParameters();
+		for (ItemFilm f : getFilms()) {
+			if (identification) {
+				if (f.sameFilm(title)) {
+					LinkedList<Review> reviewList = f.getReviews();
+					for (Review r : reviewList) {
+						if (r.sameLogin(login)) {
+							r.replaceReview(mark, comment);
+							return (f.getMean());
+						}
+					}
+					f.addReviews(reviewItemFilmAdded);
+					return (f.getMean());
+					}else {
+					throw new NotItemException("the Book " + title + " do not existe in the data base please add it.");
+				}
+			}
+		}
+		return Mean;
 	}
 
 	@Override
@@ -177,8 +209,8 @@ public class SocialNetwork implements ISocialNetwork {
 
 		}
 
-		Review reviewItemBookToAdd = new Review(login, title, mark, comment);
-		reviewItemBookToAdd.checkParameters();
+		Review reviewItemBookAdded = new Review(login, title, mark, comment);
+		reviewItemBookAdded.checkParameters();
 		for (ItemBook b : getBooks()) {
 			if (identification) {
 				if (b.sameBook(title)) {
@@ -189,7 +221,7 @@ public class SocialNetwork implements ISocialNetwork {
 							return (b.getMean());
 						}
 					}
-					b.addReviews(reviewItemBookToAdd);
+					b.addReviews(reviewItemBookAdded);
 					return (b.getMean());
 					}else {
 					throw new NotItemException("the Book " + title + " do not existe in the data base please add it.");
