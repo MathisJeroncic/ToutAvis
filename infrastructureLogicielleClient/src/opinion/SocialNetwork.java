@@ -74,8 +74,7 @@ public class SocialNetwork implements ISocialNetwork {
 
 	@Override
 	public int nbFilms() {
-		// TODO Auto-generated method stub
-		return 0;
+		return itemFilms.size();
 	}
 
 	@Override
