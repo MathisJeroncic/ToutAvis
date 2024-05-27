@@ -8,6 +8,7 @@ import java.util.LinkedList;
 
 import exceptions.BadEntryException;
 import exceptions.ItemBookAlreadyExistsException;
+import exceptions.ItemFilmAlreadyExistsException;
 import exceptions.MemberAlreadyExistsException;
 import exceptions.NotMemberException;
 import exceptions.NotTestReportException;
@@ -53,7 +54,7 @@ public class ConsultItemsTest {
 	
 	
 
-	public static TestReport test() throws BadEntryException, MemberAlreadyExistsException, NotMemberException, ItemBookAlreadyExistsException, NotItemException {
+	public static TestReport test() throws BadEntryException, MemberAlreadyExistsException, NotMemberException, ItemBookAlreadyExistsException, NotItemException, ItemFilmAlreadyExistsException {
 
 		ISocialNetwork sn = new SocialNetwork();
 
@@ -68,6 +69,10 @@ public class ConsultItemsTest {
 		sn.reviewItemBook("Paul", "paul","Harry Potter",(float)  5.0, "Good Roman");
 		sn.reviewItemBook("Jean", "jean","Harry Potter",(float)  4.5, ":)");
 		sn.reviewItemBook("Paul", "paul","Harry Potter",(float)  3.2, "after a second read is not that good");
+		sn.addItemFilm("Paul", "paul", "Star Wars", "FX", "director", "scriptwriter", 300);
+		sn.reviewItemFilm("Paul", "paul","Star Wars",(float)  5.0, "Good film");
+		sn.reviewItemFilm("Jean", "jean","Star Wars",(float)  4.5, ":)");
+		sn.reviewItemFilm("Paul", "paul","Star Wars",(float)  3.2, "after a second watch is not that good");
 
 		nbTests++;
 		nbErrors += consultItemsBadEntryTest(sn,null,"1.1","consultItems() doesn't reject null title");
@@ -77,6 +82,9 @@ public class ConsultItemsTest {
 		
 		nbTests++;
 		nbErrors += consultItemsOkTest(sn,"Harry Potter","2.1");
+		
+		nbTests++;
+		nbErrors += consultItemsOkTest(sn,"Star Wars","2.2");
 		
 
 		try {
@@ -89,7 +97,7 @@ public class ConsultItemsTest {
 		}
 	}
 
-	public static void main(String[] args) throws BadEntryException, MemberAlreadyExistsException, NotMemberException, ItemBookAlreadyExistsException, NotItemException {
+	public static void main(String[] args) throws BadEntryException, MemberAlreadyExistsException, NotMemberException, ItemBookAlreadyExistsException, NotItemException, ItemFilmAlreadyExistsException {
 		test();
 	}
 
