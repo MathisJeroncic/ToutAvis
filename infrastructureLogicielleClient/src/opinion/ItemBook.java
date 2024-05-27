@@ -74,7 +74,8 @@ public class ItemBook {
 	}
 
 
-	public void checkParameters() throws BadEntryException {
+	public void checkParameters() throws BadEntryException 
+	{
 
 		if (this.title == null || this.title.trim().isEmpty()) {
 			throw new BadEntryException("Title cant be empty");
