@@ -26,6 +26,7 @@ public class SocialNetwork implements ISocialNetwork {
 	public SocialNetwork() {
 		members = new LinkedList<Member>();
 		itemBooks = new LinkedList<ItemBook>();
+		itemFilms = new LinkedList<ItemFilm>();
 	}
 
 	/**

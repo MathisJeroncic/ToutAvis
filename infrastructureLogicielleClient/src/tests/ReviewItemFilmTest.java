@@ -6,6 +6,7 @@ import opinion.ItemBook;
 import opinion.ItemFilm;
 import exceptions.BadEntryException;
 import exceptions.ItemBookAlreadyExistsException;
+import exceptions.ItemFilmAlreadyExistsException;
 import exceptions.MemberAlreadyExistsException;
 import exceptions.NotMemberException;
 import exceptions.NotTestReportException;
@@ -59,14 +60,14 @@ public class ReviewItemFilmTest {
 		for (ItemFilm f : sn.getFilms()) {
 			if (f.sameFilm(title)) {
 				nbReviews = f.nbReviews();
-				bookToMark = f;
+				filmToMark = f;
 			}
 		}
 		try {
 			// Attempt to review the book
 			sn.reviewItemFilm(login, password, title, mark, comment);
 			// Check if the number of reviews has been incremented
-			if (bookToFilm.nbReviews() != nbReviews + 1) {
+			if (filmToMark.nbReviews() != nbReviews + 1) {
 				System.out.println("Err " + testId + " : the number of reviews was not incremented");
 				return 1;
 			} else {
@@ -123,14 +124,14 @@ public class ReviewItemFilmTest {
 
 		// Find the book by title and get the number of reviews
 		for (ItemFilm f : sn.getFilms()) {
-			if (f.sameFilms(title)) {
+			if (f.sameFilm(title)) {
 				nbReviews = f.nbReviews();
 				filmToMark = f;
 			}
 		}
 		try {
 			// Attempt to review the book
-			sn.reviewItemFilms(login, password, title, mark, comment);
+			sn.reviewItemFilm(login, password, title, mark, comment);
 			System.out.println("Err " + testId + " : " + errorMessage);
 			return 1;
 		} catch (NotItemException e) {
@@ -153,7 +154,7 @@ public class ReviewItemFilmTest {
 
 	// Main test method to run all test cases
 	public static TestReport test()
-			throws BadEntryException, MemberAlreadyExistsException, NotMemberException, ItemBookAlreadyExistsException {
+			throws BadEntryException, MemberAlreadyExistsException, NotMemberException, ItemBookAlreadyExistsException, ItemFilmAlreadyExistsException {
 
 		SocialNetwork sn = new SocialNetwork();
 
@@ -188,7 +189,7 @@ public class ReviewItemFilmTest {
 		sn.addMember("Paul", "paul", "fan de manga");
 		sn.addMember("Antoine", "antoine", "fan de tuto");
 		sn.addMember("Janne", "uoiu", "ras");
-		sn.addItemFilm("Paul", "paul", "One piece", "Manga", "ODA", 50);
+		sn.addItemFilm("Paul", "paul", "One piece", "Manga", "ODA", "shuesha", 50);
 
 		// Test valid reviews
 		nbTests++;
@@ -256,7 +257,7 @@ public class ReviewItemFilmTest {
 
 	// Main method to run the test
 	public static void main(String[] args)
-			throws BadEntryException, MemberAlreadyExistsException, NotMemberException, ItemBookAlreadyExistsException {
+			throws BadEntryException, MemberAlreadyExistsException, NotMemberException, ItemBookAlreadyExistsException, ItemFilmAlreadyExistsException {
 		test();
 	}
 
