@@ -256,6 +256,22 @@ public class SocialNetwork implements ISocialNetwork {
 				consultedItemReviews.add(b.getTitle()+"est un livre écrit par "+b.getAuthor()+" dans le style "+b.getKind()+" avec "+b.getNbPages()+" pages et qui a reçu pour note "+mark+"/5");
 			}
 		}
+		
+		mark=0.0f;
+		
+		for (ItemFilm f : itemFilms) {
+			if (f.getTitle() == title) {
+				reviews = f.getReviews();
+
+				for (Review r : reviews) {
+					mark += r.getMark();
+					
+				}
+				mark=mark/f.nbReviews();
+				
+				consultedItemReviews.add(f.getTitle()+"est un film écrit par "+f.getAuthor()+" dans le style "+f.getKind()+" avec "+f.getNbPages()+" pages et qui a reçu pour note "+mark+"/5");
+			}
+		}
 		return consultedItemReviews;
 
 	}
