@@ -33,11 +33,11 @@ public ItemFilm(String title, String kind, String director, String scenarist, in
 		return this.title.trim().equalsIgnoreCase(title.trim());
 	}
 
-	public String getdirector() {
+	public String getDirector() {
 		return this.director;
 	}
 	
-	public String getscenarist() {
+	public String getScenarist() {
 		return this.scenarist;
 	}
 

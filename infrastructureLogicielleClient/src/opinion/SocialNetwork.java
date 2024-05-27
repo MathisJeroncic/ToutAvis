@@ -269,7 +269,7 @@ public class SocialNetwork implements ISocialNetwork {
 				}
 				mark=mark/f.nbReviews();
 				
-				consultedItemReviews.add(f.getTitle()+"est un film écrit par "+f.getAuthor()+" dans le style "+f.getKind()+" avec "+f.getNbPages()+" pages et qui a reçu pour note "+mark+"/5");
+				consultedItemReviews.add(f.getTitle()+"est un film produit par "+f.getDirector()+" et scénarisé par "+f.getScenarist() +" dans le style "+f.getKind()+" avec "+f.getDuration()+" pages et qui a reçu pour note "+mark+"/5");
 			}
 		}
 		return consultedItemReviews;
