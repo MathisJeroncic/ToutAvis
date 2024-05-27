@@ -95,8 +95,31 @@ public class SocialNetwork implements ISocialNetwork {
 	public void addItemFilm(String login, String password, String title, String kind, String director,
 			String scriptwriter, int duration)
 			throws BadEntryException, NotMemberException, ItemFilmAlreadyExistsException {
-		// TODO Auto-generated method stub
+		
+		boolean identification = false;
 
+		ItemFilm itemFilmToAdd = new ItemFilm(title, kind, director,scriptwriter,duration);
+
+		for (ItemFilm f : itemFilms) {
+			if (itemFilmToAdd.sameFilm(f)) {
+				throw new ItemFilmAlreadyExistsException();
+			}
+		}
+		for (Member m : members) {
+
+			if (m.identifyMember(members, login, password)) {
+				identification = true;
+
+			} else {
+				throw new NotMemberException("Identification manquée");
+			}
+
+		}
+
+		itemFilmToAdd.checkParameters();
+		if (identification == true) {
+			itemFilms.add(itemFilmToAdd);
+		}
 	}
 
 	@Override
