@@ -17,6 +17,7 @@ public class SocialNetwork implements ISocialNetwork {
 
 	private LinkedList<Member> members;
 	private LinkedList<ItemBook> itemBooks;
+	private LinkedList<ItemFilm> itemFilms;
 
 	/**
 	 * Constructeur pour créer une instance du réseau social.
@@ -84,6 +85,10 @@ public class SocialNetwork implements ISocialNetwork {
 
 	public LinkedList<ItemBook> getBooks() {
 		return itemBooks;
+	}
+	
+	public LinkedList<ItemFilm> getFilms() {
+		return itemFilms;
 	}
 
 	@Override

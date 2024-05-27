@@ -21,22 +21,22 @@ public class ReviewItemFilmTest {
 		ItemFilm filmToMark	 = null;
 
 		// Find the book by title and get the number of reviews
-		for (ItemFilm b : sn.getFilms()) {
-			if (b.sameBook(title)) {
-				nbReviews = b.nbReviews();
-				bookToMark = b;
+		for (ItemFilm f : sn.getFilms()) {
+			if (f.sameFilm(title)) {
+				nbReviews = f.nbReviews();
+				filmToMark = f;
 			}
 		}
 		try {
 			// Attempt to review the book
-			sn.reviewItemBook(login, password, title, mark, comment);
+			sn.reviewItemFilm(login, password, title, mark, comment);
 			System.out.println("Err " + testId + " : " + errorMessage);
 			return 1;
 		} catch (BadEntryException e) {
 			// Check if the number of reviews has changed
-			if (bookToMark == null) {
+			if (filmToMark == null) {
 				return 0;
-			} else if (bookToMark.nbReviews() != nbReviews) {
+			} else if (filmToMark.nbReviews() != nbReviews) {
 				System.out.println("Err " + testId + " : BadEntry was thrown but the number of reviews was changed");
 				return 1;
 			} else {
@@ -50,23 +50,23 @@ public class ReviewItemFilmTest {
 	}
 
 	// Test method to check if reviewing a book works correctly
-	private static int reviewItemBookOKTest(SocialNetwork sn, String login, String password, String title, float mark,
+	private static int reviewItemFilmOKTest(SocialNetwork sn, String login, String password, String title, float mark,
 			String comment, String testId) {
 		int nbReviews = 0;
-		ItemBook bookToMark = null;
+		ItemFilm filmToMark = null;
 
 		// Find the book by title and get the number of reviews
-		for (ItemBook b : sn.getBooks()) {
-			if (b.sameBook(title)) {
-				nbReviews = b.nbReviews();
-				bookToMark = b;
+		for (ItemFilm f : sn.getFilms()) {
+			if (f.sameFilm(title)) {
+				nbReviews = f.nbReviews();
+				bookToMark = f;
 			}
 		}
 		try {
 			// Attempt to review the book
-			sn.reviewItemBook(login, password, title, mark, comment);
+			sn.reviewItemFilm(login, password, title, mark, comment);
 			// Check if the number of reviews has been incremented
-			if (bookToMark.nbReviews() != nbReviews + 1) {
+			if (bookToFilm.nbReviews() != nbReviews + 1) {
 				System.out.println("Err " + testId + " : the number of reviews was not incremented");
 				return 1;
 			} else {
@@ -80,28 +80,28 @@ public class ReviewItemFilmTest {
 	}
 
 	// Test method to check for NotMemberException when reviewing a book
-	private static int reviewItemBookNotMemberTest(SocialNetwork sn, String login, String password, String title,
+	private static int reviewItemFilmNotMemberTest(SocialNetwork sn, String login, String password, String title,
 			float mark, String comment, String testId, String errorMessage) {
 		int nbReviews = 0;
-		ItemBook bookToMark = null;
+		ItemFilm filmToMark = null;
 
 		// Find the book by title and get the number of reviews
-		for (ItemBook b : sn.getBooks()) {
-			if (b.sameBook(title)) {
-				nbReviews = b.nbReviews();
-				bookToMark = b;
+		for (ItemFilm f : sn.getFilms()) {
+			if (f.sameFilm(title)) {
+				nbReviews = f.nbReviews();
+				filmToMark = f;
 			}
 		}
 		try {
 			// Attempt to review the book
-			sn.reviewItemBook(login, password, title, mark, comment);
+			sn.reviewItemFilm(login, password, title, mark, comment);
 			System.out.println("Err " + testId + " : " + errorMessage);
 			return 1;
 		} catch (NotMemberException e) {
 			// Check if the number of reviews has changed
-			if (bookToMark == null) {
+			if (filmToMark == null) {
 				return 0;
-			} else if (bookToMark.nbReviews() != nbReviews) {
+			} else if (filmToMark.nbReviews() != nbReviews) {
 				System.out.println(
 						"Err " + testId + " : NotMemberException was thrown, but the number of reviews was changed");
 				return 1;
@@ -116,28 +116,28 @@ public class ReviewItemFilmTest {
 	}
 
 	// Test method to check for NotItemException when reviewing a book
-	private static int reviewItemBookNotItemTest(SocialNetwork sn, String login, String password, String title,
+	private static int reviewItemFilmNotItemTest(SocialNetwork sn, String login, String password, String title,
 			float mark, String comment, String testId, String errorMessage) {
 		int nbReviews = 0;
-		ItemBook bookToMark = null;
+		ItemFilm filmToMark = null;
 
 		// Find the book by title and get the number of reviews
-		for (ItemBook b : sn.getBooks()) {
-			if (b.sameBook(title)) {
-				nbReviews = b.nbReviews();
-				bookToMark = b;
+		for (ItemFilm f : sn.getFilms()) {
+			if (f.sameFilms(title)) {
+				nbReviews = f.nbReviews();
+				filmToMark = f;
 			}
 		}
 		try {
 			// Attempt to review the book
-			sn.reviewItemBook(login, password, title, mark, comment);
+			sn.reviewItemFilms(login, password, title, mark, comment);
 			System.out.println("Err " + testId + " : " + errorMessage);
 			return 1;
 		} catch (NotItemException e) {
 			// Check if the number of reviews has changed
-			if (bookToMark == null) {
+			if (filmToMark == null) {
 				return 0;
-			} else if (bookToMark.nbReviews() != nbReviews) {
+			} else if (filmToMark.nbReviews() != nbReviews) {
 				System.out.println(
 						"Err " + testId + " : NotItemException was thrown, but the number of reviews was changed");
 				return 1;
@@ -168,19 +168,19 @@ public class ReviewItemFilmTest {
 		// <=> test n°1
 		// Check if incorrect parameters cause addMember() to throw BadEntry exception
 		nbTests++;
-		nbErrors += reviewItemBookTestBadEntryTest(sn, "test", "qsdfgh", null, 2, "commentaire", "1.1",
+		nbErrors += reviewItemFilmTestBadEntryTest(sn, "test", "qsdfgh", null, 2, "commentaire", "1.1",
 				"Review() doesn't reject null title");
 		nbTests++;
-		nbErrors += reviewItemBookTestBadEntryTest(sn, "test", "qsdfgh", "", 2, "commentaire", "1.2",
+		nbErrors += reviewItemFilmTestBadEntryTest(sn, "test", "qsdfgh", "", 2, "commentaire", "1.2",
 				"Review() doesn't reject title that doesn't contain at least one character other than space");
 		nbTests++;
-		nbErrors += reviewItemBookTestBadEntryTest(sn, "test", "qsdfgh", "titre", (float) 6.0, "commentaire", "1.3",
+		nbErrors += reviewItemFilmTestBadEntryTest(sn, "test", "qsdfgh", "titre", (float) 6.0, "commentaire", "1.3",
 				"Review() doesn't reject mark greater than 5.0");
 		nbTests++;
-		nbErrors += reviewItemBookTestBadEntryTest(sn, "test", "qsdfgh", "test", 4, "", "1.4",
+		nbErrors += reviewItemFilmTestBadEntryTest(sn, "test", "qsdfgh", "test", 4, "", "1.4",
 				"Review() doesn't reject empty comment");
 		nbTests++;
-		nbErrors += reviewItemBookTestBadEntryTest(sn, "test", "qsdfgh", "test", 3, null, "1.5",
+		nbErrors += reviewItemFilmTestBadEntryTest(sn, "test", "qsdfgh", "test", 3, null, "1.5",
 				"Review() doesn't reject null comment");
 
 		// <=> test n°2
@@ -188,54 +188,54 @@ public class ReviewItemFilmTest {
 		sn.addMember("Paul", "paul", "fan de manga");
 		sn.addMember("Antoine", "antoine", "fan de tuto");
 		sn.addMember("Janne", "uoiu", "ras");
-		sn.addItemBook("Paul", "paul", "One piece", "Manga", "ODA", 50);
+		sn.addItemFilm("Paul", "paul", "One piece", "Manga", "ODA", 50);
 
 		// Test valid reviews
 		nbTests++;
-		nbErrors += reviewItemBookOKTest(sn, "Paul", "paul", "One piece", (float) 5.0, "Cool Manga", "2.1a");
+		nbErrors += reviewItemFilmOKTest(sn, "Paul", "paul", "One piece", (float) 5.0, "Cool Manga", "2.1a");
 		nbTests++;
-		nbErrors += reviewItemBookOKTest(sn, "Antoine", "antoine", "One piece", (float) 0.0, "Very long", "2.1b");
+		nbErrors += reviewItemFilmOKTest(sn, "Antoine", "antoine", "One piece", (float) 0.0, "Very long", "2.1b");
 		nbTests++;
-		nbErrors += reviewItemBookOKTest(sn, "Janne", "uoiu", "One piece", (float) 3.2, "Middle", "2.1c");
+		nbErrors += reviewItemFilmOKTest(sn, "Janne", "uoiu", "One piece", (float) 3.2, "Middle", "2.1c");
 
 		// Test invalid reviews
-		nbBooks = sn.nbBooks();
+		nbFilms = sn.nbFilms();
 		int nbReviews = 0;
-		ItemBook bookToMark = null;
+		ItemFilm filmToMark = null;
 
 		// Find the book by title and get the number of reviews
-		for (ItemBook b : sn.getBooks()) {
-			if (b.sameBook("One piece")) {
-				nbReviews = b.nbReviews();
-				bookToMark = b;
+		for (ItemFilm f : sn.getFilms()) {
+			if (f.sameFilm("One piece")) {
+				nbReviews = f.nbReviews();
+				filmToMark = f;
 			}
 		}
 
 		nbTests++;
-		nbErrors += reviewItemBookNotMemberTest(sn, "Fabrice", "STETER", "One piece", 5, "Cool Manga", "2.2",
+		nbErrors += reviewItemFilmNotMemberTest(sn, "Fabrice", "STETER", "One piece", 5, "Cool Manga", "2.2",
 				"The review has been added, but the member does not exist");
 		nbTests++;
-		nbErrors += reviewItemBookNotMemberTest(sn, "Paul", "STETER", "One piece", 5, "Cool Manga", "2.3",
+		nbErrors += reviewItemFilmNotMemberTest(sn, "Paul", "STETER", "One piece", 5, "Cool Manga", "2.3",
 				"The review has been added, but the member password is incorrect");
 		nbTests++;
-		nbErrors += reviewItemBookNotItemTest(sn, "Paul", "paul", "Miserable", 1, "so long", "2.4",
+		nbErrors += reviewItemFilmNotMemberTest(sn, "Paul", "paul", "Miserable", 1, "so long", "2.4",
 				"The review has been added, but the book does not exist");
 		nbTests++;
 
 		// Check that 'sn' was not modified unexpectedly
-		if (nbFilms != sn.nbFilms()) {
-			System.out.println("Error: the number of films was unexpectedly changed by Review()");
-			nbErrors++;
-		}
-		nbTests++;
-
 		if (nbBooks != sn.nbBooks()) {
 			System.out.println("Error: the number of books was unexpectedly changed by Review()");
 			nbErrors++;
 		}
 		nbTests++;
 
-		if (nbReviews != bookToMark.nbReviews()) {
+		if (nbFilms != sn.nbFilms()) {
+			System.out.println("Error: the number of films was unexpectedly changed by Review()");
+			nbErrors++;
+		}
+		nbTests++;
+
+		if (nbReviews != filmToMark.nbReviews()) {
 			System.out.println("Error: the number of reviews was unexpectedly changed by Review()");
 			nbErrors++;
 		}
@@ -246,10 +246,10 @@ public class ReviewItemFilmTest {
 		// Print a summary of the tests and return test results
 		try {
 			TestReport tr = new TestReport(nbTests, nbErrors);
-			System.out.println("ReviewItemBook : " + tr);
+			System.out.println("ReviewItemFilm : " + tr);
 			return tr;
 		} catch (NotTestReportException e) { // This shouldn't happen
-			System.out.println("Unexpected error in ReviewItemBook test code - Can't return valid test results");
+			System.out.println("Unexpected error in ReviewItemFilm test code - Can't return valid test results");
 			return null;
 		}
 	}
