@@ -182,7 +182,8 @@ public class AddItemBookTest {
 
 		// check if incorrect parameters cause addMember() to throw BadEntry
 		// exception
-
+		sn.addMember("test", "qsdfgh", "test");
+		
 		nbTests++;
 		nbErrors += addItemBookBadEntryTest(sn, "test", "qsdfgh", null, "fx", "jean", 48, "1.1",
 				"addMember() doesn't reject null title");
@@ -201,12 +202,21 @@ public class AddItemBookTest {
 		nbTests++;
 		nbErrors += addItemBookBadEntryTest(sn, "test", "qsdfgh", "test", "kind", "", 48, "1.6",
 				"addMember() doesn't reject author that don't contain at least one character other than space");
-//		nbTests++;
-//		nbErrors += addItemBookBadEntryTest(sn, "test", "qsdfgh","test","kind","jean",null, "1.7",
-//				"addMember() doesn't reject null nbpages");
 		nbTests++;
-		nbErrors += addItemBookBadEntryTest(sn, "test", "qsdfgh", "test", "kind", "author", 0, "1.8",
+		nbErrors += addItemBookBadEntryTest(sn, "test", "qsdfgh", "test", "kind", "author", 0, "1.7",
 				"addMember() doesn't reject nbpages that don't contain at least one pages");
+		nbTests++;
+		nbErrors += addItemBookBadEntryTest(sn, "", "qsdfgh","test","kind","jean",45, "1.8",
+				"addMember() doesn't reject null login");
+		nbTests++;
+		nbErrors += addItemBookBadEntryTest(sn, null, "qsdfgh","test","kind","jean",45, "1.9",
+				"addMember() doesn't reject login that don't contain at least one character other than space");
+		nbTests++;
+		nbErrors += addItemBookBadEntryTest(sn, "test", "","test","kind","jean",45, "1.10",
+				"addMember() doesn't reject null password");
+		nbTests++;
+		nbErrors += addItemBookBadEntryTest(sn, "test", null,"test","kind","jean",45, "1.11",
+				"addMember() doesn't reject password that don't contain at least one character other than space");
 
 		// <=> test n°2
 

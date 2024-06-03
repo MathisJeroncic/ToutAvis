@@ -86,7 +86,7 @@ public class SocialNetwork implements ISocialNetwork {
 	public LinkedList<ItemBook> getBooks() {
 		return itemBooks;
 	}
-	
+
 	public LinkedList<ItemFilm> getFilms() {
 		return itemFilms;
 	}
@@ -96,24 +96,30 @@ public class SocialNetwork implements ISocialNetwork {
 			String scriptwriter, int duration)
 			throws BadEntryException, NotMemberException, ItemFilmAlreadyExistsException {
 		
-		boolean identification = false;
+		if (login == null || login.trim().isEmpty()) {
 
-		ItemFilm itemFilmToAdd = new ItemFilm(title, kind, director,scriptwriter,duration);
+			throw new BadEntryException("login cant be empty");
+		}
+		if (password == null || password.trim().isEmpty()) {
+
+			throw new BadEntryException("password cant be empty");
+		}
+
+		boolean identification = false;
+		Member m = new Member(title, password, "test");
+
+		if (m.identifyMember(members, login, password)) {
+			identification = true;
+		} else {
+			throw new NotMemberException("Identification manquée");
+		}
+
+		ItemFilm itemFilmToAdd = new ItemFilm(title, kind, director, scriptwriter, duration);
 
 		for (ItemFilm f : itemFilms) {
 			if (itemFilmToAdd.sameFilm(f)) {
 				throw new ItemFilmAlreadyExistsException();
 			}
-		}
-		for (Member m : members) {
-
-			if (m.identifyMember(members, login, password)) {
-				identification = true;
-
-			} else {
-				throw new NotMemberException("Identification manquée");
-			}
-
 		}
 
 		itemFilmToAdd.checkParameters();
@@ -126,7 +132,23 @@ public class SocialNetwork implements ISocialNetwork {
 	public void addItemBook(String login, String password, String title, String kind, String author, int nbPages)
 			throws BadEntryException, NotMemberException, ItemBookAlreadyExistsException {
 
+		if (login == null || login.trim().isEmpty()) {
+
+			throw new BadEntryException("login cant be empty");
+		}
+		if (password == null || password.trim().isEmpty()) {
+
+			throw new BadEntryException("password cant be empty");
+		}
+
 		boolean identification = false;
+		Member m = new Member(title, password, "test");
+
+		if (m.identifyMember(members, login, password)) {
+			identification = true;
+		} else {
+			throw new NotMemberException("Identification manquée");
+		}
 
 		ItemBook itemBookToAdd = new ItemBook(title, kind, author, nbPages);
 
@@ -134,16 +156,6 @@ public class SocialNetwork implements ISocialNetwork {
 			if (itemBookToAdd.sameBook(b)) {
 				throw new ItemBookAlreadyExistsException();
 			}
-		}
-		for (Member m : members) {
-
-			if (m.identifyMember(members, login, password)) {
-				identification = true;
-
-			} else {
-				throw new NotMemberException("Identification manquée");
-			}
-
 		}
 
 		itemBookToAdd.checkParameters();
@@ -155,20 +167,27 @@ public class SocialNetwork implements ISocialNetwork {
 	@Override
 	public float reviewItemFilm(String login, String password, String title, float mark, String comment)
 			throws BadEntryException, NotMemberException, NotItemException {
+		
+		if (login == null || login.trim().isEmpty()) {
+
+			throw new BadEntryException("login cant be empty");
+		}
+		if (password == null || password.trim().isEmpty()) {
+
+			throw new BadEntryException("password cant be empty");
+		}
 
 		boolean identification = false;
+		Member m = new Member(title, password, "test");
+
+		if (m.identifyMember(members, login, password)) {
+			identification = true;
+		} else {
+			throw new NotMemberException("Identification manquée");
+		}
+
 		float Mean = 0.0f;
 
-		for (Member m : members) {
-
-			if (m.identifyMember(members, login, password)) {
-				identification = true;
-
-			} else {
-				throw new NotMemberException("Identification manquée");
-			}
-
-		}
 		Review reviewItemFilmAdded = new Review(login, title, mark, comment);
 		reviewItemFilmAdded.checkParameters();
 		for (ItemFilm f : getFilms()) {
@@ -183,7 +202,7 @@ public class SocialNetwork implements ISocialNetwork {
 					}
 					f.addReviews(reviewItemFilmAdded);
 					return (f.getMean());
-					}else {
+				} else {
 					throw new NotItemException("the Book " + title + " do not existe in the data base please add it.");
 				}
 			}
@@ -194,20 +213,26 @@ public class SocialNetwork implements ISocialNetwork {
 	@Override
 	public float reviewItemBook(String login, String password, String title, float mark, String comment)
 			throws BadEntryException, NotMemberException, NotItemException {
+		
+		if (login == null || login.trim().isEmpty()) {
 
-		boolean identification = false;
-		float Mean = 0.0f;
-
-		for (Member m : members) {
-
-			if (m.identifyMember(members, login, password)) {
-				identification = true;
-
-			} else {
-				throw new NotMemberException("Identification manquée");
-			}
-
+			throw new BadEntryException("login cant be empty");
 		}
+		if (password == null || password.trim().isEmpty()) {
+
+			throw new BadEntryException("password cant be empty");
+		}
+		
+		boolean identification = false;
+		Member m = new Member(title, password, "test");
+
+		if (m.identifyMember(members, login, password)) {
+			identification = true;
+		} else {
+			throw new NotMemberException("Identification manquée");
+		}
+		
+		float Mean = 0.0f;
 
 		Review reviewItemBookAdded = new Review(login, title, mark, comment);
 		reviewItemBookAdded.checkParameters();
@@ -223,7 +248,7 @@ public class SocialNetwork implements ISocialNetwork {
 					}
 					b.addReviews(reviewItemBookAdded);
 					return (b.getMean());
-					}else {
+				} else {
 					throw new NotItemException("the Book " + title + " do not existe in the data base please add it.");
 				}
 			}
@@ -237,12 +262,11 @@ public class SocialNetwork implements ISocialNetwork {
 		LinkedList<Review> reviews = new LinkedList<Review>();
 		LinkedList<String> consultedItemReviews = new LinkedList<String>();
 
-		float mark=0.0f;
+		float mark = 0.0f;
 
 		if (title == null || title.trim().isEmpty()) {
 			throw new BadEntryException("Title cant be null");
 		}
-
 
 		for (ItemBook b : itemBooks) {
 			if (b.getTitle() == title) {
@@ -250,27 +274,30 @@ public class SocialNetwork implements ISocialNetwork {
 
 				for (Review r : reviews) {
 					mark += r.getMark();
-					
+
 				}
-				mark=mark/b.nbReviews();
-				
-				consultedItemReviews.add(b.getTitle()+"est un livre écrit par "+b.getAuthor()+" dans le style "+b.getKind()+" avec "+b.getNbPages()+" pages et qui a reçu pour note "+mark+"/5");
+				mark = mark / b.nbReviews();
+
+				consultedItemReviews.add(b.getTitle() + "est un livre écrit par " + b.getAuthor() + " dans le style "
+						+ b.getKind() + " avec " + b.getNbPages() + " pages et qui a reçu pour note " + mark + "/5");
 			}
 		}
-		
-		mark=0.0f;
-		
+
+		mark = 0.0f;
+
 		for (ItemFilm f : itemFilms) {
 			if (f.getTitle() == title) {
 				reviews = f.getReviews();
 
 				for (Review r : reviews) {
 					mark += r.getMark();
-					
+
 				}
-				mark=mark/f.nbReviews();
-				
-				consultedItemReviews.add(f.getTitle()+"est un film produit par "+f.getDirector()+" et scénarisé par "+f.getScenarist() +" dans le style "+f.getKind()+" avec "+f.getDuration()+" pages et qui a reçu pour note "+mark+"/5");
+				mark = mark / f.nbReviews();
+
+				consultedItemReviews.add(f.getTitle() + "est un film produit par " + f.getDirector()
+						+ " et scénarisé par " + f.getScenarist() + " dans le style " + f.getKind() + " avec "
+						+ f.getDuration() + " pages et qui a reçu pour note " + mark + "/5");
 			}
 		}
 		return consultedItemReviews;

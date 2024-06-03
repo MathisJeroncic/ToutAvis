@@ -170,6 +170,8 @@ public class ReviewItemBookTest {
 
 		// <=> test n°1
 		// Check if incorrect parameters cause addMember() to throw BadEntry exception
+		sn.addMember("test", "qsdfgh", "test");
+		
 		nbTests++;
 		nbErrors += reviewItemBookTestBadEntryTest(sn, "test", 
 				"qsdfgh", null, 2,"commentaire", "1.1", 
@@ -186,6 +188,18 @@ public class ReviewItemBookTest {
 		nbTests++;
 		nbErrors += reviewItemBookTestBadEntryTest(sn, "test", "qsdfgh", "test", 3, null, "1.5",
 				"Review() doesn't reject null comment");
+		nbTests++;
+		nbErrors += reviewItemBookTestBadEntryTest(sn, "", "qsdfgh","test",2.1f,"commentaire", "1.6",
+				"addItemFilm() doesn't reject null login");
+		nbTests++;
+		nbErrors += reviewItemBookTestBadEntryTest(sn, null, "qsdfgh","test",2.1f,"commentaire", "1.7",
+				"addItemFilm() doesn't reject login that don't contain at least one character other than space");
+		nbTests++;
+		nbErrors += reviewItemBookTestBadEntryTest(sn, "test", "","test",2.1f,"commentaire", "1.8",
+				"addItemFilm() doesn't reject null password");
+		nbTests++;
+		nbErrors += reviewItemBookTestBadEntryTest(sn, "test", null,"test",2.1f,"commentaire", "1.9",
+				"addItemFilm() doesn't reject password that don't contain at least one character other than space");
 
 		// <=> test n°2
 		// Populate 'sn' with 3 members and a book

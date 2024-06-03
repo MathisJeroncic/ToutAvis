@@ -177,33 +177,47 @@ public class AddItemFilmTest {
 		// check if incorrect parameters cause addMember() to throw BadEntry
 		// exception
 
+		sn.addMember("test", "qsdfgh", "test");
+		
 		nbTests++;
 		nbErrors += addItemFilmBadEntryTest(sn, "test", "qsdfgh", null, "fx", "jean", "scriptwriter",250 ,"1.1",
-				"addMember() doesn't reject null title");
+				"addItemFilm() doesn't reject null title");
 		nbTests++;
 		nbErrors += addItemFilmBadEntryTest(sn, "test", "qsdfgh", "", "kind", "author", "scriptwriter",250, "1.2",
-				"addMember() doesn't reject title that don't contain at least one character other than space");
+				"addItemFilm() doesn't reject title that don't contain at least one character other than space");
 		nbTests++;
 		nbErrors += addItemFilmBadEntryTest(sn, "test", "qsdfgh", "test", null, "jean", "scriptwriter",250, "1.3",
-				"addMember() doesn't reject null kind");
+				"addItemFilm() doesn't reject null kind");
 		nbTests++;
 		nbErrors += addItemFilmBadEntryTest(sn, "test", "qsdfgh", "test", "", "author", "scriptwriter",250, "1.4",
-				"addMember() doesn't reject kind that don't contain at least one character other than space");
+				"addItemFilm() doesn't reject kind that don't contain at least one character other than space");
 		nbTests++;
 		nbErrors += addItemFilmBadEntryTest(sn, "test", "qsdfgh", "test", "fx", null, "scriptwriter",250, "1.5",
-				"addMember() doesn't reject null director");
+				"addItemFilm() doesn't reject null director");
 		nbTests++;
 		nbErrors += addItemFilmBadEntryTest(sn, "test", "qsdfgh", "test", "kind", "", "scriptwriter",250, "1.6",
-				"addMember() doesn't reject director that don't contain at least one character other than space");
+				"addItemFilm() doesn't reject director that don't contain at least one character other than space");
 		nbTests++;
-		nbErrors += addItemFilmBadEntryTest(sn, "test", "qsdfgh", "test", "fx", "author", null,250, "1.5",
-				"addMember() doesn't reject null scriptwriter");
+		nbErrors += addItemFilmBadEntryTest(sn, "test", "qsdfgh", "test", "fx", "author", null,250, "1.7",
+				"addItemFilm() doesn't reject null scriptwriter");
 		nbTests++;
-		nbErrors += addItemFilmBadEntryTest(sn, "test", "qsdfgh", "test", "kind", "author", "",250, "1.6",
-				"addMember() doesn't reject scriptwriter that don't contain at least one character other than space");
+		nbErrors += addItemFilmBadEntryTest(sn, "test", "qsdfgh", "test", "kind", "author", "",250, "1.8",
+				"addItemFilm() doesn't reject scriptwriter that don't contain at least one character other than space");
 		nbTests++;
-		nbErrors += addItemFilmBadEntryTest(sn, "test", "qsdfgh", "test", "kind", "author", "",-25, "1.7",
-				"addMember() doesn't reject a film duration who is not stricly positive ");
+		nbErrors += addItemFilmBadEntryTest(sn, "test", "qsdfgh", "test", "kind", "author", "",-25, "1.9",
+				"addItemFilm() doesn't reject a film duration who is not stricly positive ");
+		nbTests++;
+		nbErrors += addItemFilmBadEntryTest(sn, "", "qsdfgh","test","kind","jean","scriptwriter",45, "1.10",
+				"addItemFilm() doesn't reject null login");
+		nbTests++;
+		nbErrors += addItemFilmBadEntryTest(sn, null, "qsdfgh","test","kind","jean","scriptwriter",45, "1.11",
+				"addItemFilm() doesn't reject login that don't contain at least one character other than space");
+		nbTests++;
+		nbErrors += addItemFilmBadEntryTest(sn, "test", "","test","kind","jean","scriptwriter",45, "1.12",
+				"addItemFilm() doesn't reject null password");
+		nbTests++;
+		nbErrors += addItemFilmBadEntryTest(sn, "test", null,"test","kind","jean","scriptwriter",45, "1.13",
+				"addItemFilm() doesn't reject password that don't contain at least one character other than space");
 
 		// <=> test n°2
 
