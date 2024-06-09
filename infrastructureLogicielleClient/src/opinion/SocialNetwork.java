@@ -186,7 +186,7 @@ public class SocialNetwork implements ISocialNetwork {
 
 		float Mean = 0.0f;
 
-		Review reviewItemFilmAdded = new Review(login, title, mark, comment);
+		Review reviewItemFilmAdded = new Review(m, title, mark, comment);
 		reviewItemFilmAdded.checkParameters();
 		for (ItemFilm f : getFilms()) {
 			if (identification) {
@@ -220,21 +220,17 @@ public class SocialNetwork implements ISocialNetwork {
 			throw new BadEntryException("password cant be empty or < 4");
 		}
 		
-		boolean identification = false;
-		Member m = new Member(title, password, "test");
+		Member m = new Member(login, password, "test");
 
-		if (m.identifyMember(members, login, password)) {
-			identification = true;
-		} else {
+		if (m.identifyMember(members, login, password)==false) {
 			throw new NotMemberException("Identification manquée");
 		}
 		
 		float Mean = 0.0f;
 
-		Review reviewItemBookAdded = new Review(login, title, mark, comment);
+		Review reviewItemBookAdded = new Review(m, title, mark, comment);
 		reviewItemBookAdded.checkParameters();
 		for (ItemBook b : getBooks()) {
-			if (identification) {
 				if (b.sameBook(title)) {
 					LinkedList<Review> reviewList = b.getReviews();
 					for (Review r : reviewList) {
@@ -248,7 +244,6 @@ public class SocialNetwork implements ISocialNetwork {
 				} else {
 					throw new NotItemException("the Book " + title + " do not existe in the data base please add it.");
 				}
-			}
 		}
 		return Mean;
 	}

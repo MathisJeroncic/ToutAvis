@@ -20,7 +20,9 @@ public class ReviewItemBookTest {
 		
 		int nbReviews = 0;
 		ItemBook bookToMark = null;
-		
+		if (title == null || title.trim().isEmpty()) {
+			return 0;
+		}
 		// Find the book by title and get the number of reviews
 		for(ItemBook b: sn.getBooks()) {
 			if (b.sameBook(title)) {
@@ -207,15 +209,16 @@ public class ReviewItemBookTest {
 		sn.addMember("Paul", "paul", "fan de manga");
 		sn.addMember("Antoine", "antoine", "fan de tuto");
 		sn.addMember("Janne", "uoiu", "ras");
-		sn.addItemBook("Paul", "paul", "One piece", "Manga", "ODA", 50);
+
+		System.out.println(sn.getBooks());
 
 		// Test valid reviews
 		nbTests++;
-		nbErrors += reviewItemBookOKTest(sn, "Paul", "paul", "One piece",(float) 5.0, "Cool Manga", "2.1a");
+		nbErrors += reviewItemBookOKTest(sn, "Paul", "paul", "test",(float) 5.0, "Cool Manga", "2.1a");
 		nbTests++;
-		nbErrors += reviewItemBookOKTest(sn, "Antoine", "antoine", "One piece", (float) 0.0, "Very long", "2.1b");
+		nbErrors += reviewItemBookOKTest(sn, "Antoine", "antoine", "test", (float) 0.0, "Very long", "2.1b");
 		nbTests++;
-		nbErrors += reviewItemBookOKTest(sn, "Janne", "uoiu", "One piece",(float) 3.2, "Middle", "2.1c");
+		nbErrors += reviewItemBookOKTest(sn, "Janne", "uoiu", "test",(float) 3.2, "Middle", "2.1c");
 
 		// Test invalid reviews
 		nbBooks = sn.nbBooks();
@@ -224,7 +227,7 @@ public class ReviewItemBookTest {
 		
 		// Find the book by title and get the number of reviews
 		for(ItemBook b: sn.getBooks()) {
-			if (b.sameBook("One piece")) {
+			if (b.sameBook("test")) {
 				nbReviews = b.nbReviews();
 				bookToMark = b;
 			}

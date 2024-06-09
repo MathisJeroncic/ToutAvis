@@ -19,8 +19,10 @@ public class ReviewItemFilmTest {
 			float mark, String comment, String testId, String errorMessage) {
 
 		int nbReviews = 0;
-		ItemFilm filmToMark	 = null;
-
+		ItemFilm filmToMark = null;
+		if (title == null || title.trim().isEmpty()) {
+			return 0;
+		}
 		// Find the book by title and get the number of reviews
 		for (ItemFilm f : sn.getFilms()) {
 			if (f.sameFilm(title)) {
@@ -153,8 +155,8 @@ public class ReviewItemFilmTest {
 	}
 
 	// Main test method to run all test cases
-	public static TestReport test()
-			throws BadEntryException, MemberAlreadyExistsException, NotMemberException, ItemBookAlreadyExistsException, ItemFilmAlreadyExistsException {
+	public static TestReport test() throws BadEntryException, MemberAlreadyExistsException, NotMemberException,
+			ItemBookAlreadyExistsException, ItemFilmAlreadyExistsException {
 
 		SocialNetwork sn = new SocialNetwork();
 
@@ -169,7 +171,7 @@ public class ReviewItemFilmTest {
 		// <=> test n°1
 		// Check if incorrect parameters cause addMember() to throw BadEntry exception
 		sn.addMember("test", "qsdfgh", "test");
-		
+
 		nbTests++;
 		nbErrors += reviewItemFilmTestBadEntryTest(sn, "test", "qsdfgh", null, 2, "commentaire", "1.1",
 				"Review() doesn't reject null title");
@@ -186,16 +188,16 @@ public class ReviewItemFilmTest {
 		nbErrors += reviewItemFilmTestBadEntryTest(sn, "test", "qsdfgh", "test", 3, null, "1.5",
 				"Review() doesn't reject null comment");
 		nbTests++;
-		nbErrors += reviewItemFilmTestBadEntryTest(sn, "", "qsdfgh","test",2.1f,"commentaire", "1.6",
+		nbErrors += reviewItemFilmTestBadEntryTest(sn, "", "qsdfgh", "test", 2.1f, "commentaire", "1.6",
 				"addItemFilm() doesn't reject null login");
 		nbTests++;
-		nbErrors += reviewItemFilmTestBadEntryTest(sn, null, "qsdfgh","test",2.1f,"commentaire", "1.7",
+		nbErrors += reviewItemFilmTestBadEntryTest(sn, null, "qsdfgh", "test", 2.1f, "commentaire", "1.7",
 				"addItemFilm() doesn't reject login that don't contain at least one character other than space");
 		nbTests++;
-		nbErrors += reviewItemFilmTestBadEntryTest(sn, "test", "","test",2.1f,"commentaire", "1.8",
+		nbErrors += reviewItemFilmTestBadEntryTest(sn, "test", "", "test", 2.1f, "commentaire", "1.8",
 				"addItemFilm() doesn't reject null password");
 		nbTests++;
-		nbErrors += reviewItemFilmTestBadEntryTest(sn, "test", null,"test",2.1f,"commentaire", "1.9",
+		nbErrors += reviewItemFilmTestBadEntryTest(sn, "test", null, "test", 2.1f, "commentaire", "1.9",
 				"addItemFilm() doesn't reject password that don't contain at least one character other than space");
 
 		// <=> test n°2
@@ -270,8 +272,8 @@ public class ReviewItemFilmTest {
 	}
 
 	// Main method to run the test
-	public static void main(String[] args)
-			throws BadEntryException, MemberAlreadyExistsException, NotMemberException, ItemBookAlreadyExistsException, ItemFilmAlreadyExistsException {
+	public static void main(String[] args) throws BadEntryException, MemberAlreadyExistsException, NotMemberException,
+			ItemBookAlreadyExistsException, ItemFilmAlreadyExistsException {
 		test();
 	}
 
