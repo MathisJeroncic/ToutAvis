@@ -3,20 +3,20 @@ package opinion;
 import exceptions.BadEntryException;
 
 public class Review {
-	private String login;
+	private Member reviewer;
 	private String title;
 	private float mark;
 	private String comment;
 
-	public Review(String login, String title, float mark, String comment) {
-		this.login = login;
+	public Review(Member reviewer, String title, float mark, String comment) {
+		this.reviewer = reviewer;
 		this.title = title;
 		this.mark = mark;
 		this.comment = comment;
 	}
 
-	public String getLogin() {
-		return this.login;
+	public Member getReviewer() {
+		return this.reviewer;
 	}
 
 	public String getTitle() {
@@ -32,7 +32,7 @@ public class Review {
 	}
 
 	public boolean sameLogin(String login) {
-		return this.login.trim().equalsIgnoreCase(login.trim());
+		return this.reviewer.getLogin().trim().equalsIgnoreCase(login.trim());
 	}
 
 	public void replaceReview(float mark, String comment) {
