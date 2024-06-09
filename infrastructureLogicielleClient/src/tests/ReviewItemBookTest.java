@@ -171,6 +171,7 @@ public class ReviewItemBookTest {
 		// <=> test n°1
 		// Check if incorrect parameters cause addMember() to throw BadEntry exception
 		sn.addMember("test", "qsdfgh", "test");
+		sn.addItemBook("test", "qsdfgh", "test","fx","author",152);
 		
 		nbTests++;
 		nbErrors += reviewItemBookTestBadEntryTest(sn, "test", 
@@ -180,7 +181,7 @@ public class ReviewItemBookTest {
 		nbErrors += reviewItemBookTestBadEntryTest(sn, "test", "qsdfgh", "", 2,"commentaire", "1.2",
 				"Review() doesn't reject title that doesn't contain at least one character other than space");
 		nbTests++;
-		nbErrors += reviewItemBookTestBadEntryTest(sn, "test", "qsdfgh", "titre", (float) 6.0, "commentaire", "1.3",
+		nbErrors += reviewItemBookTestBadEntryTest(sn, "test", "qsdfgh", "test", (float) 6.0, "commentaire", "1.3",
 				"Review() doesn't reject mark greater than 5.0");
 		nbTests++;
 		nbErrors += reviewItemBookTestBadEntryTest(sn, "test", "qsdfgh", "test", 4, "", "1.4",

@@ -100,9 +100,8 @@ public class SocialNetwork implements ISocialNetwork {
 
 			throw new BadEntryException("login cant be empty");
 		}
-		if (password == null || password.trim().isEmpty()) {
-
-			throw new BadEntryException("password cant be empty");
+		if (password == null || password.trim().isEmpty() || password.trim().length() < 4) {
+			throw new BadEntryException("password cant be empty or < 4");
 		}
 
 		boolean identification = false;
@@ -136,7 +135,7 @@ public class SocialNetwork implements ISocialNetwork {
 
 			throw new BadEntryException("login cant be empty");
 		}
-		if (password == null || password.trim().isEmpty()) {
+		if (password == null || password.trim().isEmpty() || password.trim().length() < 4) {
 
 			throw new BadEntryException("password cant be empty");
 		}
@@ -172,9 +171,8 @@ public class SocialNetwork implements ISocialNetwork {
 
 			throw new BadEntryException("login cant be empty");
 		}
-		if (password == null || password.trim().isEmpty()) {
-
-			throw new BadEntryException("password cant be empty");
+		if (password == null || password.trim().isEmpty() || password.trim().length() < 4) {
+			throw new BadEntryException("password cant be empty or < 4");
 		}
 
 		boolean identification = false;
@@ -218,9 +216,8 @@ public class SocialNetwork implements ISocialNetwork {
 
 			throw new BadEntryException("login cant be empty");
 		}
-		if (password == null || password.trim().isEmpty()) {
-
-			throw new BadEntryException("password cant be empty");
+		if (password == null || password.trim().isEmpty() || password.trim().length() < 4) {
+			throw new BadEntryException("password cant be empty or < 4");
 		}
 		
 		boolean identification = false;

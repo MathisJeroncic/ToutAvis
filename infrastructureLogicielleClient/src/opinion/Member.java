@@ -75,7 +75,7 @@ public class Member {
 
 	public boolean identifyMember(LinkedList<Member> members, String login, String password) {
 		for (Member m : members) {
-			if (m.areYou(login) && m.getPassword().trim().equalsIgnoreCase(password)) {
+			if (m.areYou(login) && m.getPassword().trim().equalsIgnoreCase(password.trim())) {
 				return true;
 			}
 		}
