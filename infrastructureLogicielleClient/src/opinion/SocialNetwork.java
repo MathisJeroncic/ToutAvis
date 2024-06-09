@@ -8,6 +8,7 @@ import exceptions.ItemFilmAlreadyExistsException;
 import exceptions.MemberAlreadyExistsException;
 import exceptions.NotItemException;
 import exceptions.NotMemberException;
+import tests.Tools;
 
 /**
  * Skeleton for the SocialNetwork
@@ -305,8 +306,21 @@ public class SocialNetwork implements ISocialNetwork {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		 ISocialNetwork sn = new SocialNetwork();
+	     int nbMembers = 100;
+	     int nbBooks = 50;
+	     int nbFilms = 50;
+	     int nbReviews = 200;
 
+	    try {
+            long meantime = Tools.populate(sn, nbMembers, nbBooks, nbFilms, nbReviews);
+            System.out.println("Meantime per operation: " + meantime + " ns");
+        } catch (BadEntryException | MemberAlreadyExistsException | NotMemberException | 
+                 ItemBookAlreadyExistsException | ItemFilmAlreadyExistsException | 
+                 NotItemException e) {
+            e.printStackTrace();
+        }
+		
 	}
 
 }
