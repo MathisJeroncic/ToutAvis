@@ -18,7 +18,6 @@ public class ItemBook extends Item {
 		
 		this.author = author;
 		this.nbPages = nbPages;
-		reviews=new LinkedList<Review>();
 	}
 
 	public String toString() {

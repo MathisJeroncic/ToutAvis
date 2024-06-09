@@ -13,6 +13,7 @@ public class Item {
 	{
 		this.title=title;
 		this.kind=kind;
+		reviews=new LinkedList<Review>();
 	}
 	
 	public String getTitle() {

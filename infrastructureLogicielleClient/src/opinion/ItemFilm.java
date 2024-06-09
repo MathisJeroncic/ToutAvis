@@ -17,7 +17,7 @@ public ItemFilm(String title, String kind, String director, String scenarist, in
 		this.director = director;
 		this.scenarist = scenarist;
 		this.duration = duration;
-		reviews=new LinkedList<Review>();
+		
 	}
 
 	public String toString() {
