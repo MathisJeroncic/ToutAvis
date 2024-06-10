@@ -12,9 +12,26 @@ import exceptions.NotMemberException;
 import exceptions.NotTestReportException;
 import exceptions.NotItemException;
 
+/**
+ * The ReviewItemFilmTest class contains methods to test the reviewItemFilm()
+ * method in the ISocialNetwork interface implementation.
+ */
 public class ReviewItemFilmTest {
 
-	// Test method to check for BadEntryException when reviewing a book
+	/**
+	 * Tests if the reviewItemFilm() method throws BadEntryException for incorrect
+	 * parameters.
+	 *
+	 * @param sn           The social network on which to perform the test.
+	 * @param login        The login of the member attempting to review the film.
+	 * @param password     The password of the member attempting to review the film.
+	 * @param title        The title of the film to review.
+	 * @param mark         The mark given to the film.
+	 * @param comment      The comment provided with the review.
+	 * @param testId       The identifier of the test.
+	 * @param errorMessage The error message to display in case of failure.
+	 * @return 0 if the test passes, 1 otherwise.
+	 */
 	private static int reviewItemFilmTestBadEntryTest(SocialNetwork sn, String login, String password, String title,
 			float mark, String comment, String testId, String errorMessage) {
 
@@ -52,7 +69,18 @@ public class ReviewItemFilmTest {
 		}
 	}
 
-	// Test method to check if reviewing a book works correctly
+	/**
+	 * Tests if the reviewItemFilm() method successfully reviews a film.
+	 *
+	 * @param sn       The social network on which to perform the test.
+	 * @param login    The login of the member attempting to review the film.
+	 * @param password The password of the member attempting to review the film.
+	 * @param title    The title of the film to review.
+	 * @param mark     The mark given to the film.
+	 * @param comment  The comment provided with the review.
+	 * @param testId   The identifier of the test.
+	 * @return 0 if the test passes, 1 otherwise.
+	 */
 	private static int reviewItemFilmOKTest(SocialNetwork sn, String login, String password, String title, float mark,
 			String comment, String testId) {
 		int nbReviews = 0;
@@ -82,7 +110,20 @@ public class ReviewItemFilmTest {
 		}
 	}
 
-	// Test method to check for NotMemberException when reviewing a book
+	/**
+	 * Tests if the reviewItemFilm() method throws NotMemberException when the
+	 * member does not exist.
+	 *
+	 * @param sn           The social network on which to perform the test.
+	 * @param login        The login of the member attempting to review the film.
+	 * @param password     The password of the member attempting to review the film.
+	 * @param title        The title of the film to review.
+	 * @param mark         The mark given to the film.
+	 * @param comment      The comment provided with the review.
+	 * @param testId       The identifier of the test.
+	 * @param errorMessage The error message to display in case of failure.
+	 * @return 0 if the test passes, 1 otherwise.
+	 */
 	private static int reviewItemFilmNotMemberTest(SocialNetwork sn, String login, String password, String title,
 			float mark, String comment, String testId, String errorMessage) {
 		int nbReviews = 0;
@@ -118,7 +159,20 @@ public class ReviewItemFilmTest {
 		}
 	}
 
-	// Test method to check for NotItemException when reviewing a book
+	/**
+	 * Tests if the reviewItemFilm() method throws NotItemException when the film
+	 * does not exist.
+	 *
+	 * @param sn           The social network on which to perform the test.
+	 * @param login        The login of the member attempting to review the film.
+	 * @param password     The password of the member attempting to review the film.
+	 * @param title        The title of the film to review.
+	 * @param mark         The mark given to the film.
+	 * @param comment      The comment provided with the review.
+	 * @param testId       The identifier of the test.
+	 * @param errorMessage The error message to display in case of failure.
+	 * @return 0 if the test passes, 1 otherwise.
+	 */
 	private static int reviewItemFilmNotItemTest(SocialNetwork sn, String login, String password, String title,
 			float mark, String comment, String testId, String errorMessage) {
 		int nbReviews = 0;
@@ -154,7 +208,14 @@ public class ReviewItemFilmTest {
 		}
 	}
 
-	// Main test method to run all test cases
+	/**
+	 * Executes the test cases for the reviewItemFilm() method.
+	 *
+	 * @return TestReport containing the results of the tests.
+	 * @throws BadEntryException            if one of the entries is invalid.
+	 * @throws MemberAlreadyExistsException if a member with the given login already
+	 *                                      exists.
+	 */
 	public static TestReport test() throws BadEntryException, MemberAlreadyExistsException, NotMemberException,
 			ItemBookAlreadyExistsException, ItemFilmAlreadyExistsException {
 
@@ -271,7 +332,14 @@ public class ReviewItemFilmTest {
 		}
 	}
 
-	// Main method to run the test
+	/**
+	 * Main method to execute the test cases.
+	 *
+	 * @param args Command-line arguments.
+	 * @throws BadEntryException            if one of the entries is invalid.
+	 * @throws MemberAlreadyExistsException if a member with the given login already
+	 *                                      exists.
+	 */
 	public static void main(String[] args) throws BadEntryException, MemberAlreadyExistsException, NotMemberException,
 			ItemBookAlreadyExistsException, ItemFilmAlreadyExistsException {
 		test();

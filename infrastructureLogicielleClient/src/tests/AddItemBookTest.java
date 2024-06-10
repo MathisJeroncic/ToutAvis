@@ -1,5 +1,7 @@
 /**
  * This class provides test cases for the addItemBook method in the ISocialNetwork interface.
+ * It contains methods to test various scenarios such as adding books with correct and incorrect parameters,
+ * handling already existing books, and verifying the behavior when the user is not a member of the social network.
  */
 package tests;
 
@@ -13,10 +15,10 @@ import exceptions.NotTestReportException;
 import exceptions.NotMemberException;
 
 /**
- * This class contains test methods for the addItemBook method in the
- * ISocialNetwork interface.
+ * This class contains test methods for the addItemBook method in the ISocialNetwork interface.
+ * It includes test cases for validating the behavior of the addItemBook method in different scenarios.
  */
-public class AddItemBookTest {	
+public class AddItemBookTest {
 
 	/**
 	 * Tests if addItemBook method throws BadEntryException for incorrect

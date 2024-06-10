@@ -1,3 +1,6 @@
+/**
+ * This class provides test cases for the addItemFilm method in the ISocialNetwork interface.
+ */
 package tests;
 
 import opinion.ISocialNetwork;
@@ -9,95 +12,100 @@ import exceptions.MemberAlreadyExistsException;
 import exceptions.NotTestReportException;
 import exceptions.NotMemberException;
 
-
+/**
+ * This class contains test methods for the addItemFilm method in the ISocialNetwork interface.
+ */
 public class AddItemFilmTest {
 
-	/**
-	 * Tests if addItemFilm method throws BadEntryException for incorrect
-	 * parameters.
-	 *
-	 * @param sn           The social network on which to perform the test.
-	 * @param login        The user's login.
-	 * @param pwd          The user's password.
-	 * @param title        The title of the book to add.
-	 * @param kind         The category of the book to add.
-	 * @param author       The author of the book to add.
-	 * @param nbPages      The number of pages of the book to add.
-	 * @param testId       The identifier of the test.
-	 * @param errorMessage The error message to display in case of failure.
-	 * @return 1 if the test fails, 0 otherwise.
-	 */
-	private static int addItemFilmBadEntryTest(ISocialNetwork sn, String login, String pwd, String title, String kind,
-			String director,String scriptwriter, int duration, String testId, String errorMessage) {
-		int nbFilms = sn.nbFilms();
+    /**
+     * Tests if addItemFilm method throws BadEntryException for incorrect parameters.
+     *
+     * @param sn           The social network on which to perform the test.
+     * @param login        The user's login.
+     * @param pwd          The user's password.
+     * @param title        The title of the book to add.
+     * @param kind         The category of the book to add.
+     * @param director     The director of the film to add.
+     * @param scriptwriter The scriptwriter of the film to add.
+     * @param duration     The duration of the film to add.
+     * @param testId       The identifier of the test.
+     * @param errorMessage The error message to display in case of failure.
+     * @return 1 if the test fails, 0 otherwise.
+     */
+    private static int addItemFilmBadEntryTest(ISocialNetwork sn, String login, String pwd, String title, String kind,
+                                                String director, String scriptwriter, int duration, String testId,
+                                                String errorMessage) {
+        int nbFilms = sn.nbFilms();
 
-		try {
-			sn.addItemFilm(login, pwd, title, kind, director, scriptwriter,duration);
-			System.out.println("Err " + testId + " : " + errorMessage);
-			return 1;
-		} catch (BadEntryException e) {
-			if (sn.nbFilms() != nbFilms) {
-				System.out.println("Err " + testId + " : BadEntry was thrown but the number of films was changed");
-				return 1;
-			} else
-				return 0;
-		} catch (Exception e) {
-			System.out.println("Err " + testId + " : unexpected exception. " + e);
-			e.printStackTrace();
-			return 1;
-		}
-	}
+        try {
+            sn.addItemFilm(login, pwd, title, kind, director, scriptwriter, duration);
+            System.out.println("Err " + testId + " : " + errorMessage);
+            return 1;
+        } catch (BadEntryException e) {
+            if (sn.nbFilms() != nbFilms) {
+                System.out.println("Err " + testId + " : BadEntry was thrown but the number of films was changed");
+                return 1;
+            } else
+                return 0;
+        } catch (Exception e) {
+            System.out.println("Err " + testId + " : unexpected exception. " + e);
+            e.printStackTrace();
+            return 1;
+        }
+    }
 
-	/**
-	 * Tests if addItemBook method throws ItemBookAlreadyExistsException when adding
-	 * an already existing book.
-	 *
-	 * @param sn           The social network on which to perform the test.
-	 * @param login        The user's login.
-	 * @param pwd          The user's password.
-	 * @param title        The title of the book to add.
-	 * @param kind         The category of the book to add.
-	 * @param author       The author of the book to add.
-	 * @param nbPages      The number of pages of the book to add.
-	 * @param testId       The identifier of the test.
-	 * @param errorMessage The error message to display in case of failure.
-	 * @return 1 if the test fails, 0 otherwise.
-	 */
-	private static int addItemFilmAlreadyExistsTest(ISocialNetwork sn, String login, String pwd, String title,
-			String kind, String director,String scriptwriter, int duration, String testId, String errorMessage) {
-		int nbFilms = sn.nbFilms();
+    /**
+     * Tests if addItemFilm method throws ItemFilmAlreadyExistsException when adding an already existing film.
+     *
+     * @param sn           The social network on which to perform the test.
+     * @param login        The user's login.
+     * @param pwd          The user's password.
+     * @param title        The title of the film to add.
+     * @param kind         The category of the film to add.
+     * @param director     The director of the film to add.
+     * @param scriptwriter The scriptwriter of the film to add.
+     * @param duration     The duration of the film to add.
+     * @param testId       The identifier of the test.
+     * @param errorMessage The error message to display in case of failure.
+     * @return 1 if the test fails, 0 otherwise.
+     */
+    private static int addItemFilmAlreadyExistsTest(ISocialNetwork sn, String login, String pwd, String title,
+                                                    String kind, String director, String scriptwriter, int duration,
+                                                    String testId, String errorMessage) {
+        int nbFilms = sn.nbFilms();
 
-		try {
-			sn.addItemFilm(login, pwd, title, kind, director, scriptwriter,duration);
-			System.out.println("Err " + testId + " : " + errorMessage);
-			return 1;
-		} catch (ItemFilmAlreadyExistsException e) {
-			if (sn.nbFilms() != nbFilms) {
-				System.out.println("Err " + testId
-						+ " : ItemBookAlreadyExistsException was thrown, but the number of Film was changed");
-				return 1;
-			} else
-				return 0;
-		} catch (Exception e) {
-			System.out.println("Err " + testId + " : unexpected exception. " + e);
-			e.printStackTrace();
-			return 1;
-		}
-	}
+        try {
+            sn.addItemFilm(login, pwd, title, kind, director, scriptwriter, duration);
+            System.out.println("Err " + testId + " : " + errorMessage);
+            return 1;
+        } catch (ItemFilmAlreadyExistsException e) {
+            if (sn.nbFilms() != nbFilms) {
+                System.out.println("Err " + testId
+                        + " : ItemFilmAlreadyExistsException was thrown, but the number of Film was changed");
+                return 1;
+            } else
+                return 0;
+        } catch (Exception e) {
+            System.out.println("Err " + testId + " : unexpected exception. " + e);
+            e.printStackTrace();
+            return 1;
+        }
+    }
 
-	/**
-	 * Tests if addItemBook method adds a book successfully.
-	 *
-	 * @param sn      The social network on which to perform the test.
-	 * @param login   The user's login.
-	 * @param pwd     The user's password.
-	 * @param title   The title of the book to add.
-	 * @param kind    The category of the book to add.
-	 * @param author  The author of the book to add.
-	 * @param nbPages The number of pages of the book to add.
-	 * @param testId  The identifier of the test.
-	 * @return 1 if the test fails, 0 otherwise.
-	 */
+    /**
+     * Tests if addItemFilm method adds a film successfully.
+     *
+     * @param sn           The social network on which to perform the test.
+     * @param login        The user's login.
+     * @param pwd          The user's password.
+     * @param title        The title of the film to add.
+     * @param kind         The category of the film to add.
+     * @param director     The director of the film to add.
+     * @param scriptwriter The scriptwriter of the film to add.
+     * @param duration     The duration of the film to add.
+     * @param testId       The identifier of the test.
+     * @return 1 if the test fails, 0 otherwise.
+     */
 	private static int addItemFilmOKTest(ISocialNetwork sn, String login, String pwd, String title, String kind,
 			String director,String scriptwriter, int duration, String testId) {
 		int nbFilms = sn.nbFilms();
@@ -116,39 +124,40 @@ public class AddItemFilmTest {
 	}
 
 	/**
-	 * Tests if addItemBook method throws NotMemberException when the user is not a
-	 * member.
+	 * Tests if addItemFilm method throws NotMemberException when the user is not a member.
 	 *
 	 * @param sn           The social network on which to perform the test.
 	 * @param login        The user's login.
 	 * @param pwd          The user's password.
-	 * @param title        The title of the book to add.
-	 * @param kind         The category of the book to add.
-	 * @param author       The author of the book to add.
-	 * @param nbPages      The number of pages of the book to add.
+	 * @param title        The title of the film to add.
+	 * @param kind         The category of the film to add.
+	 * @param director     The director of the film to add.
+	 * @param scriptwriter The scriptwriter of the film to add.
+	 * @param duration     The duration of the film to add.
 	 * @param testId       The identifier of the test.
 	 * @param errorMessage The error message to display in case of failure.
 	 * @return 1 if the test fails, 0 otherwise.
 	 */
 	private static int addItemFilmNotMemberTest(ISocialNetwork sn, String login, String pwd, String title, String kind,
-			String director,String scriptwriter, int duration, String testId, String errorMessage) {
-		int nbFilms = sn.nbFilms();
-		try {
-			sn.addItemFilm(login, pwd, title, kind, director, scriptwriter,duration);
-			System.out.println("Err " + testId + " : " + errorMessage);
-			return 1;
-		} catch (NotMemberException e) {
-			if (sn.nbFilms() != nbFilms) {
-				System.out.println(
-						"Err " + testId + " : NotMemberException was thrown, but the number of Film was changed");
-				return 1;
-			} else
-				return 0;
-		} catch (Exception e) {
-			System.out.println("Err " + testId + " : unexpected exception. " + e);
-			e.printStackTrace();
-			return 1;
-		}
+	                                            String director, String scriptwriter, int duration, String testId,
+	                                            String errorMessage) {
+	    int nbFilms = sn.nbFilms();
+	    try {
+	        sn.addItemFilm(login, pwd, title, kind, director, scriptwriter, duration);
+	        System.out.println("Err " + testId + " : " + errorMessage);
+	        return 1;
+	    } catch (NotMemberException e) {
+	        if (sn.nbFilms() != nbFilms) {
+	            System.out.println(
+	                    "Err " + testId + " : NotMemberException was thrown, but the number of Film was changed");
+	            return 1;
+	        } else
+	            return 0;
+	    } catch (Exception e) {
+	        System.out.println("Err " + testId + " : unexpected exception. " + e);
+	        e.printStackTrace();
+	        return 1;
+	    }
 	}
 
 	/**
