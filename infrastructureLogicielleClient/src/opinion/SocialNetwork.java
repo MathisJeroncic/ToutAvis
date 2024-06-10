@@ -175,18 +175,12 @@ public class SocialNetwork implements ISocialNetwork {
 		if (password == null || password.trim().isEmpty() || password.trim().length() < 4) {
 			throw new BadEntryException("password cant be empty or < 4");
 		}
-
-		boolean identification = false;
+		
 		Member m = new Member(title, password, "test");
 
-		if (m.identifyMember(members, login, password)) {
-			identification = true;
-		} else {
+		if (m.identifyMember(members, login, password)==false) {
 			throw new NotMemberException("Identification manquée");
 		}
-
-		float Mean = 0.0f;
-
 		Review reviewItemFilmAdded = new Review(m, title, mark, comment);
 		reviewItemFilmAdded.checkParameters();
 		for (ItemFilm f : getFilms()) {
@@ -222,8 +216,6 @@ public class SocialNetwork implements ISocialNetwork {
 		if (m.identifyMember(members, login, password) == false) {
 			throw new NotMemberException("Identification manquée");
 		}
-
-		float Mean = 0.0f;
 
 		Review reviewItemBookAdded = new Review(m, title, mark, comment);
 		reviewItemBookAdded.checkParameters();
