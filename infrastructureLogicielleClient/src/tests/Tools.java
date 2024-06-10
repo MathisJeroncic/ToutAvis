@@ -2,6 +2,9 @@ package tests;
 
 import opinion.ISocialNetwork;
 import opinion.SocialNetwork;
+
+import java.util.LinkedList;
+
 import exceptions.*;
 
 /**
@@ -163,24 +166,54 @@ public class Tools {
 		return elapsedTime/totalNbOfOperations; 
 
 	}
-	public static void main(String[] args) {
-		ISocialNetwork sn = new SocialNetwork();
-        int nbMembers = 100;
-        int nbBooks = 100;
-        int nbFilms = 100;
-        int nbReviews = 200;
-
-        try {
-            long meantime = Tools.populate(sn, nbMembers, nbBooks, nbFilms, nbReviews);
-            System.out.println("Meantime per operation: " + meantime + " ns");
-        } catch (BadEntryException | MemberAlreadyExistsException | NotMemberException | 
-                 ItemBookAlreadyExistsException | ItemFilmAlreadyExistsException | 
-                 NotItemException e) {
-            e.printStackTrace();
-        }
-	
+	public static void main(String[] args) throws Exception {
+		
+		SocialNetwork sn = new SocialNetwork();
+		int nbMembers = 500;
+		int nbBooks = 2500;
+		int nbFilms = 2500;
+		int nbReviews = 10000;
+		
+		
+		
+		long valuesBasics = populate(sn, nbMembers, nbBooks, nbFilms, nbReviews);
+		System.out.println(valuesBasics);
+		
+		
+		nbMembers = 50;
+		nbBooks = 500;
+		nbFilms = 500;
+		nbReviews = 1000;
+		int nbIterations = 50;
+		
+		LinkedList<Long> valuesMembers = new LinkedList<Long>();
+		
+		for(int i=1 ;i < nbIterations; i+=5) {
+			long test = populate(sn, i*nbMembers, nbBooks, nbFilms, nbReviews);
+			valuesMembers.add(test);
+		}
+		
+		System.out.println(valuesMembers);
+			
+		
+		nbMembers = 500;
+		nbBooks = 50;
+		nbFilms = 500;
+		nbReviews = 1000;
+		nbIterations = 50;
+		
+		LinkedList<Long> valuesBooks = new LinkedList<Long>();
+		
+		for(int i=1 ;i < nbIterations; i+=5) {
+			long test = populate(sn, nbMembers, i*nbBooks, nbFilms, nbReviews);
+			valuesBooks.add(test);
+		}
+		
+		System.out.println(valuesBooks);
+		
+		
+		
 	}
+
 }
-
-
 
