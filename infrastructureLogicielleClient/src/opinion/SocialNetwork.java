@@ -21,9 +21,8 @@ public class SocialNetwork implements ISocialNetwork {
 	private LinkedList<ItemFilm> itemFilms;
 
 	/**
-	 * Constructeur pour créer une instance du réseau social.
+	 * Constructor to create an instance of the social network.
 	 */
-
 	public SocialNetwork() {
 		members = new LinkedList<Member>();
 		itemBooks = new LinkedList<ItemBook>();
@@ -31,19 +30,13 @@ public class SocialNetwork implements ISocialNetwork {
 	}
 
 	/**
-	 * Ajoute un nouveau membre au réseau social.
+	 * Adds a new member to the social network.
 	 * 
-	 * @param login    Le login du membre à ajouter. Ne doit pas être {@code null}
-	 *                 ou vide.
-	 * @param password Le mot de passe du membre à ajouter. Ne doit pas être
-	 *                 {@code null} et doit contenir au moins 4 caractères.
-	 * @param profile  Le profil du membre à ajouter. Ne doit pas être {@code null}.
-	 * @throws BadEntryException            Si le login est {@code null}, vide, le
-	 *                                      mot de passe est {@code null}, a moins
-	 *                                      de 4 caractères, ou le profil est
-	 *                                      {@code null}.
-	 * @throws MemberAlreadyExistsException Si un membre avec le même login existe
-	 *                                      déjà dans le réseau.
+	 * @param login    The login of the member to add. Must not be {@code null} or empty.
+	 * @param password The password of the member to add. Must not be {@code null} and must contain at least 4 characters.
+	 * @param profile  The profile of the member to add. Must not be {@code null}.
+	 * @throws BadEntryException            If the login is {@code null}, empty, the password is {@code null}, less than 4 characters, or the profile is {@code null}.
+	 * @throws MemberAlreadyExistsException If a member with the same login already exists in the network.
 	 */
 	@Override
 	public void addMember(String login, String password, String profile)
@@ -62,43 +55,73 @@ public class SocialNetwork implements ISocialNetwork {
 	}
 
 	/**
-	 * Vérifie si un membre avec le login spécifié existe dans le réseau social.
+	 * Returns the number of members in the social network.
 	 * 
-	 * @param login Le login à vérifier.
-	 * @return {@code true} si le membre existe, {@code false} sinon.
+	 * @return The number of members.
 	 */
-
 	@Override
 	public int nbMembers() {
-
 		return members.size();
 	}
 
+	/**
+	 * Returns the number of films in the social network.
+	 * 
+	 * @return The number of films.
+	 */
 	@Override
 	public int nbFilms() {
 		return itemFilms.size();
 	}
 
+	/**
+	 * Returns the number of books in the social network.
+	 * 
+	 * @return The number of books.
+	 */
 	@Override
 	public int nbBooks() {
 		return itemBooks.size();
 	}
 
+	/**
+	 * Returns the list of books in the social network.
+	 * 
+	 * @return The list of books.
+	 */
 	public LinkedList<ItemBook> getBooks() {
 		return itemBooks;
 	}
 
+	/**
+	 * Returns the list of films in the social network.
+	 * 
+	 * @return The list of films.
+	 */
 	public LinkedList<ItemFilm> getFilms() {
 		return itemFilms;
 	}
 
+	/**
+	 * Adds a new film to the social network.
+	 * 
+	 * @param login       The login of the member adding the film. Must not be {@code null} or empty.
+	 * @param password    The password of the member adding the film. Must not be {@code null} and must contain at least 4 characters.
+	 * @param title       The title of the film. Must not be {@code null} or empty.
+	 * @param kind        The genre of the film. Must not be {@code null}.
+	 * @param director    The director of the film. Must not be {@code null}.
+	 * @param scriptwriter The scriptwriter of the film. Must not be {@code null}.
+	 * @param duration    The duration of the film in minutes.
+	 * @throws BadEntryException             If any of the parameters are invalid.
+	 * @throws NotMemberException            If the member is not found or password is incorrect.
+	 * @throws ItemFilmAlreadyExistsException If a film with the same title already exists in the network.
+	 */
 	@Override
 	public void addItemFilm(String login, String password, String title, String kind, String director,
 			String scriptwriter, int duration)
 			throws BadEntryException, NotMemberException, ItemFilmAlreadyExistsException {
 
 		if (login == null || login.trim().isEmpty()) {
-
 			throw new BadEntryException("login cant be empty");
 		}
 		if (password == null || password.trim().isEmpty() || password.trim().length() < 4) {
@@ -128,16 +151,27 @@ public class SocialNetwork implements ISocialNetwork {
 		}
 	}
 
+	/**
+	 * Adds a new book to the social network.
+	 * 
+	 * @param login    The login of the member adding the book. Must not be {@code null} or empty.
+	 * @param password The password of the member adding the book. Must not be {@code null} and must contain at least 4 characters.
+	 * @param title    The title of the book. Must not be {@code null} or empty.
+	 * @param kind     The genre of the book. Must not be {@code null}.
+	 * @param author   The author of the book. Must not be {@code null}.
+	 * @param nbPages  The number of pages in the book.
+	 * @throws BadEntryException             If any of the parameters are invalid.
+	 * @throws NotMemberException            If the member is not found or password is incorrect.
+	 * @throws ItemBookAlreadyExistsException If a book with the same title already exists in the network.
+	 */
 	@Override
 	public void addItemBook(String login, String password, String title, String kind, String author, int nbPages)
 			throws BadEntryException, NotMemberException, ItemBookAlreadyExistsException {
 
 		if (login == null || login.trim().isEmpty()) {
-
 			throw new BadEntryException("login cant be empty");
 		}
 		if (password == null || password.trim().isEmpty() || password.trim().length() < 4) {
-
 			throw new BadEntryException("password cant be empty");
 		}
 
@@ -164,56 +198,71 @@ public class SocialNetwork implements ISocialNetwork {
 		}
 	}
 
+	/**
+	 * Adds a review for a film in the social network.
+	 * 
+	 * @param login    The login of the member adding the review. Must not be {@code null} or empty.
+	 * @param password The password of the member adding the review. Must not be {@code null} and must contain at least 4 characters.
+	 * @param title    The title of the film being reviewed. Must not be {@code null} or empty.
+	 * @param mark     The mark given to the film. Must be between 0 and 5.
+	 * @param comment  The comment of the review. Must not be {@code null}.
+	 * @return The average mark of the film after adding the review.
+	 * @throws BadEntryException If any of the parameters are invalid.
+	 * @throws NotMemberException If the member is not found or password is incorrect.
+	 * @throws NotItemException   If the film is not found in the network.
+	 */
 	@Override
 	public float reviewItemFilm(String login, String password, String title, float mark, String comment)
 			throws BadEntryException, NotMemberException, NotItemException {
 
 		if (login == null || login.trim().isEmpty()) {
-
 			throw new BadEntryException("login cant be empty");
 		}
 		if (password == null || password.trim().isEmpty() || password.trim().length() < 4) {
 			throw new BadEntryException("password cant be empty or < 4");
 		}
-
-		boolean identification = false;
+		
 		Member m = new Member(title, password, "test");
 
-		if (m.identifyMember(members, login, password)) {
-			identification = true;
-		} else {
+		if (m.identifyMember(members, login, password)==false) {
 			throw new NotMemberException("Identification manquée");
 		}
-
-		float Mean = 0.0f;
-
 		Review reviewItemFilmAdded = new Review(m, title, mark, comment);
 		reviewItemFilmAdded.checkParameters();
 		for (ItemFilm f : getFilms()) {
-			if (identification) {
-				if (f.sameFilm(title)) {
-					LinkedList<Review> reviewList = f.getReviews();
-					for (Review r : reviewList) {
-						if (r.sameLogin(login)) {
-							r.replaceReview(mark, comment);
-							return (f.getMean());
-						}
+			if (f.sameFilm(title)) {
+				LinkedList<Review> reviewList = f.getReviews();
+				for (Review r : reviewList) {
+					if (r.sameLogin(login)) {
+						r.replaceReview(mark, comment);
+						return (f.getMean());
 					}
-					f.addReviews(reviewItemFilmAdded);
-					return (f.getMean());
 				}
+				f.addReviews(reviewItemFilmAdded);
+				return (f.getMean());
 			}
-
 		}
 		throw new NotItemException("the Book " + title + " do not existe in the data base please add it.");
 	}
 
+	/**
+	 * Adds a review for a book in the social network.
+	 * 
+	 * @param login    The login of the member adding the review. Must not be {@code null} or empty.
+	 * @param password The password of the member adding the review. Must not be {@code null} and must contain at least 4 characters.
+	 * @param title    The title of the book being reviewed. Must not be {@code null} or empty.
+	 * @param mark     The mark given to the book. Must be between 0 and 5.
+	 * @param comment  The comment of the review. Must not be {@code null}.
+	 * @return The average mark of the book after adding the review.
+	 * @throws BadEntryException If any of the parameters are invalid.
+	 * @throws NotMemberException If the member is not found or password is incorrect.
+	 * @throws NotItemException   If the book is not found in the network.
+	 */
 	@Override
 	public float reviewItemBook(String login, String password, String title, float mark, String comment)
 			throws BadEntryException, NotMemberException, NotItemException {
 
 		if (login == null || login.trim().isEmpty()) {
-
 			throw new BadEntryException("login cant be empty");
 		}
 		if (password == null || password.trim().isEmpty() || password.trim().length() < 4) {
@@ -225,8 +274,6 @@ public class SocialNetwork implements ISocialNetwork {
 		if (m.identifyMember(members, login, password) == false) {
 			throw new NotMemberException("Identification manquée");
 		}
-
-		float Mean = 0.0f;
 
 		Review reviewItemBookAdded = new Review(m, title, mark, comment);
 		reviewItemBookAdded.checkParameters();
@@ -243,11 +290,16 @@ public class SocialNetwork implements ISocialNetwork {
 				return (b.getMean());
 			}
 		}
-
 		throw new NotItemException("the Book " + title + " do not existe in the data base please add it.");
-
 	}
 
+	/**
+	 * Consults items (books or films) in the social network by title.
+	 * 
+	 * @param title The title of the item to consult. Must not be {@code null} or empty.
+	 * @return A list of strings describing the items found.
+	 * @throws BadEntryException If the title is {@code null} or empty.
+	 */
 	@Override
 	public LinkedList<String> consultItems(String title) throws BadEntryException {
 
@@ -297,7 +349,9 @@ public class SocialNetwork implements ISocialNetwork {
 	}
 
 	/**
-	 * @param args
+	 * Main method to test the social network.
+	 * 
+	 * @param args Command line arguments.
 	 */
 	public static void main(String[] args) {
 		ISocialNetwork sn = new SocialNetwork();

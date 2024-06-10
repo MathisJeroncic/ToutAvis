@@ -11,20 +11,36 @@ import exceptions.NotMemberException;
 import exceptions.NotTestReportException;
 import exceptions.NotItemException;
 
+/**
+ * The ReviewItemBookTest class contains methods to test the reviewItemBook()
+ * method in the ISocialNetwork interface implementation.
+ */
 public class ReviewItemBookTest {
-	
-	// Test method to check for BadEntryException when reviewing a book
-	private static int reviewItemBookTestBadEntryTest(SocialNetwork sn, String login, 
-			String password, String title, float mark,
-			String comment, String testId, String errorMessage){
-		
+
+	/**
+	 * Tests if the reviewItemBook() method throws BadEntryException for incorrect
+	 * parameters.
+	 *
+	 * @param sn           The social network on which to perform the test.
+	 * @param login        The login of the member attempting to review the book.
+	 * @param password     The password of the member attempting to review the book.
+	 * @param title        The title of the book to review.
+	 * @param mark         The mark given to the book.
+	 * @param comment      The comment provided with the review.
+	 * @param testId       The identifier of the test.
+	 * @param errorMessage The error message to display in case of failure.
+	 * @return 0 if the test passes, 1 otherwise.
+	 */
+	private static int reviewItemBookTestBadEntryTest(SocialNetwork sn, String login, String password, String title,
+			float mark, String comment, String testId, String errorMessage) {
+
 		int nbReviews = 0;
 		ItemBook bookToMark = null;
 		if (title == null || title.trim().isEmpty()) {
 			return 0;
 		}
 		// Find the book by title and get the number of reviews
-		for(ItemBook b: sn.getBooks()) {
+		for (ItemBook b : sn.getBooks()) {
 			if (b.sameBook(title)) {
 				nbReviews = b.nbReviews();
 				bookToMark = b;
@@ -49,18 +65,28 @@ public class ReviewItemBookTest {
 			System.out.println("Err " + testId + " : unexpected exception. " + e);
 			e.printStackTrace();
 			return 1;
-		}		
+		}
 	}
-	
-	// Test method to check if reviewing a book works correctly
-	private static int reviewItemBookOKTest(SocialNetwork sn, String login, 
-			String password, String title, float mark,
+
+	/**
+	 * Tests if the reviewItemBook() method successfully reviews a book.
+	 *
+	 * @param sn       The social network on which to perform the test.
+	 * @param login    The login of the member attempting to review the book.
+	 * @param password The password of the member attempting to review the book.
+	 * @param title    The title of the book to review.
+	 * @param mark     The mark given to the book.
+	 * @param comment  The comment provided with the review.
+	 * @param testId   The identifier of the test.
+	 * @return 0 if the test passes, 1 otherwise.
+	 */
+	private static int reviewItemBookOKTest(SocialNetwork sn, String login, String password, String title, float mark,
 			String comment, String testId) {
 		int nbReviews = 0;
 		ItemBook bookToMark = null;
-		
+
 		// Find the book by title and get the number of reviews
-		for(ItemBook b: sn.getBooks()) {
+		for (ItemBook b : sn.getBooks()) {
 			if (b.sameBook(title)) {
 				nbReviews = b.nbReviews();
 				bookToMark = b;
@@ -82,16 +108,28 @@ public class ReviewItemBookTest {
 			return 1;
 		}
 	}
-	
-	// Test method to check for NotMemberException when reviewing a book
-	private static int reviewItemBookNotMemberTest(SocialNetwork sn, String login, 
-			String password, String title, float mark,
-			String comment, String testId, String errorMessage) {
+
+	/**
+	 * Tests if the reviewItemBook() method throws NotMemberException when the
+	 * member does not exist.
+	 *
+	 * @param sn           The social network on which to perform the test.
+	 * @param login        The login of the member attempting to review the book.
+	 * @param password     The password of the member attempting to review the book.
+	 * @param title        The title of the book to review.
+	 * @param mark         The mark given to the book.
+	 * @param comment      The comment provided with the review.
+	 * @param testId       The identifier of the test.
+	 * @param errorMessage The error message to display in case of failure.
+	 * @return 0 if the test passes, 1 otherwise.
+	 */
+	private static int reviewItemBookNotMemberTest(SocialNetwork sn, String login, String password, String title,
+			float mark, String comment, String testId, String errorMessage) {
 		int nbReviews = 0;
 		ItemBook bookToMark = null;
-		
+
 		// Find the book by title and get the number of reviews
-		for(ItemBook b: sn.getBooks()) {
+		for (ItemBook b : sn.getBooks()) {
 			if (b.sameBook(title)) {
 				nbReviews = b.nbReviews();
 				bookToMark = b;
@@ -119,16 +157,28 @@ public class ReviewItemBookTest {
 			return 1;
 		}
 	}
-	
-	// Test method to check for NotItemException when reviewing a book
-	private static int reviewItemBookNotItemTest(SocialNetwork sn, String login, 
-			String password, String title, float mark,
-			String comment, String testId, String errorMessage) {
+
+	/**
+	 * Tests if the reviewItemBook() method throws NotItemException when the book
+	 * does not exist.
+	 *
+	 * @param sn           The social network on which to perform the test.
+	 * @param login        The login of the member attempting to review the book.
+	 * @param password     The password of the member attempting to review the book.
+	 * @param title        The title of the book to review.
+	 * @param mark         The mark given to the book.
+	 * @param comment      The comment provided with the review.
+	 * @param testId       The identifier of the test.
+	 * @param errorMessage The error message to display in case of failure.
+	 * @return 0 if the test passes, 1 otherwise.
+	 */
+	private static int reviewItemBookNotItemTest(SocialNetwork sn, String login, String password, String title,
+			float mark, String comment, String testId, String errorMessage) {
 		int nbReviews = 0;
 		ItemBook bookToMark = null;
-		
+
 		// Find the book by title and get the number of reviews
-		for(ItemBook b: sn.getBooks()) {
+		for (ItemBook b : sn.getBooks()) {
 			if (b.sameBook(title)) {
 				nbReviews = b.nbReviews();
 				bookToMark = b;
@@ -157,8 +207,16 @@ public class ReviewItemBookTest {
 		}
 	}
 
-	// Main test method to run all test cases
-	public static TestReport test() throws BadEntryException, MemberAlreadyExistsException, NotMemberException, ItemBookAlreadyExistsException {
+	/**
+	 * Executes the test cases for the reviewItemBook() method.
+	 *
+	 * @return TestReport containing the results of the tests.
+	 * @throws BadEntryException            if one of the entries is invalid.
+	 * @throws MemberAlreadyExistsException if a member with the given login already
+	 *                                      exists.
+	 */
+	public static TestReport test()
+			throws BadEntryException, MemberAlreadyExistsException, NotMemberException, ItemBookAlreadyExistsException {
 
 		SocialNetwork sn = new SocialNetwork();
 
@@ -173,14 +231,13 @@ public class ReviewItemBookTest {
 		// <=> test n°1
 		// Check if incorrect parameters cause addMember() to throw BadEntry exception
 		sn.addMember("test", "qsdfgh", "test");
-		sn.addItemBook("test", "qsdfgh", "test","fx","author",152);
-		
+		sn.addItemBook("test", "qsdfgh", "test", "fx", "author", 152);
+
 		nbTests++;
-		nbErrors += reviewItemBookTestBadEntryTest(sn, "test", 
-				"qsdfgh", null, 2,"commentaire", "1.1", 
+		nbErrors += reviewItemBookTestBadEntryTest(sn, "test", "qsdfgh", null, 2, "commentaire", "1.1",
 				"Review() doesn't reject null title");
 		nbTests++;
-		nbErrors += reviewItemBookTestBadEntryTest(sn, "test", "qsdfgh", "", 2,"commentaire", "1.2",
+		nbErrors += reviewItemBookTestBadEntryTest(sn, "test", "qsdfgh", "", 2, "commentaire", "1.2",
 				"Review() doesn't reject title that doesn't contain at least one character other than space");
 		nbTests++;
 		nbErrors += reviewItemBookTestBadEntryTest(sn, "test", "qsdfgh", "test", (float) 6.0, "commentaire", "1.3",
@@ -192,16 +249,16 @@ public class ReviewItemBookTest {
 		nbErrors += reviewItemBookTestBadEntryTest(sn, "test", "qsdfgh", "test", 3, null, "1.5",
 				"Review() doesn't reject null comment");
 		nbTests++;
-		nbErrors += reviewItemBookTestBadEntryTest(sn, "", "qsdfgh","test",2.1f,"commentaire", "1.6",
+		nbErrors += reviewItemBookTestBadEntryTest(sn, "", "qsdfgh", "test", 2.1f, "commentaire", "1.6",
 				"addItemFilm() doesn't reject null login");
 		nbTests++;
-		nbErrors += reviewItemBookTestBadEntryTest(sn, null, "qsdfgh","test",2.1f,"commentaire", "1.7",
+		nbErrors += reviewItemBookTestBadEntryTest(sn, null, "qsdfgh", "test", 2.1f, "commentaire", "1.7",
 				"addItemFilm() doesn't reject login that don't contain at least one character other than space");
 		nbTests++;
-		nbErrors += reviewItemBookTestBadEntryTest(sn, "test", "","test",2.1f,"commentaire", "1.8",
+		nbErrors += reviewItemBookTestBadEntryTest(sn, "test", "", "test", 2.1f, "commentaire", "1.8",
 				"addItemFilm() doesn't reject null password");
 		nbTests++;
-		nbErrors += reviewItemBookTestBadEntryTest(sn, "test", null,"test",2.1f,"commentaire", "1.9",
+		nbErrors += reviewItemBookTestBadEntryTest(sn, "test", null, "test", 2.1f, "commentaire", "1.9",
 				"addItemFilm() doesn't reject password that don't contain at least one character other than space");
 
 		// <=> test n°2
@@ -214,19 +271,19 @@ public class ReviewItemBookTest {
 
 		// Test valid reviews
 		nbTests++;
-		nbErrors += reviewItemBookOKTest(sn, "Paul", "paul", "test",(float) 5.0, "Cool Manga", "2.1a");
+		nbErrors += reviewItemBookOKTest(sn, "Paul", "paul", "test", (float) 5.0, "Cool Manga", "2.1a");
 		nbTests++;
 		nbErrors += reviewItemBookOKTest(sn, "Antoine", "antoine", "test", (float) 0.0, "Very long", "2.1b");
 		nbTests++;
-		nbErrors += reviewItemBookOKTest(sn, "Janne", "uoiu", "test",(float) 3.2, "Middle", "2.1c");
+		nbErrors += reviewItemBookOKTest(sn, "Janne", "uoiu", "test", (float) 3.2, "Middle", "2.1c");
 
 		// Test invalid reviews
 		nbBooks = sn.nbBooks();
 		int nbReviews = 0;
 		ItemBook bookToMark = null;
-		
+
 		// Find the book by title and get the number of reviews
-		for(ItemBook b: sn.getBooks()) {
+		for (ItemBook b : sn.getBooks()) {
 			if (b.sameBook("test")) {
 				nbReviews = b.nbReviews();
 				bookToMark = b;
@@ -234,8 +291,8 @@ public class ReviewItemBookTest {
 		}
 
 		nbTests++;
-		nbErrors += reviewItemBookNotMemberTest(sn, "Fabrice", "STETER", "One piece", 5, "Cool Manga",
-				"2.2", "The review has been added, but the member does not exist");
+		nbErrors += reviewItemBookNotMemberTest(sn, "Fabrice", "STETER", "One piece", 5, "Cool Manga", "2.2",
+				"The review has been added, but the member does not exist");
 		nbTests++;
 		nbErrors += reviewItemBookNotMemberTest(sn, "Paul", "STETER", "One piece", 5, "Cool Manga", "2.3",
 				"The review has been added, but the member password is incorrect");
@@ -276,8 +333,16 @@ public class ReviewItemBookTest {
 		}
 	}
 
-	// Main method to run the test
-	public static void main(String[] args) throws BadEntryException, MemberAlreadyExistsException, NotMemberException, ItemBookAlreadyExistsException {
+	/**
+	 * Main method to execute the test cases.
+	 *
+	 * @param args Command-line arguments.
+	 * @throws BadEntryException            if one of the entries is invalid.
+	 * @throws MemberAlreadyExistsException if a member with the given login already
+	 *                                      exists.
+	 */
+	public static void main(String[] args)
+			throws BadEntryException, MemberAlreadyExistsException, NotMemberException, ItemBookAlreadyExistsException {
 		test();
 	}
 }
