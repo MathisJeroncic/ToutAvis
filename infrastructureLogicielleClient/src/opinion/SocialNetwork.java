@@ -96,7 +96,7 @@ public class SocialNetwork implements ISocialNetwork {
 	public void addItemFilm(String login, String password, String title, String kind, String director,
 			String scriptwriter, int duration)
 			throws BadEntryException, NotMemberException, ItemFilmAlreadyExistsException {
-		
+
 		if (login == null || login.trim().isEmpty()) {
 
 			throw new BadEntryException("login cant be empty");
@@ -167,7 +167,7 @@ public class SocialNetwork implements ISocialNetwork {
 	@Override
 	public float reviewItemFilm(String login, String password, String title, float mark, String comment)
 			throws BadEntryException, NotMemberException, NotItemException {
-		
+
 		if (login == null || login.trim().isEmpty()) {
 
 			throw new BadEntryException("login cant be empty");
@@ -190,29 +190,25 @@ public class SocialNetwork implements ISocialNetwork {
 		Review reviewItemFilmAdded = new Review(m, title, mark, comment);
 		reviewItemFilmAdded.checkParameters();
 		for (ItemFilm f : getFilms()) {
-			if (identification) {
-				if (f.sameFilm(title)) {
-					LinkedList<Review> reviewList = f.getReviews();
-					for (Review r : reviewList) {
-						if (r.sameLogin(login)) {
-							r.replaceReview(mark, comment);
-							return (f.getMean());
-						}
+			if (f.sameFilm(title)) {
+				LinkedList<Review> reviewList = f.getReviews();
+				for (Review r : reviewList) {
+					if (r.sameLogin(login)) {
+						r.replaceReview(mark, comment);
+						return (f.getMean());
 					}
-					f.addReviews(reviewItemFilmAdded);
-					return (f.getMean());
-				} else {
-					throw new NotItemException("the Book " + title + " do not existe in the data base please add it.");
 				}
+				f.addReviews(reviewItemFilmAdded);
+				return (f.getMean());
 			}
 		}
-		return Mean;
+		throw new NotItemException("the Book " + title + " do not existe in the data base please add it.");
 	}
 
 	@Override
 	public float reviewItemBook(String login, String password, String title, float mark, String comment)
 			throws BadEntryException, NotMemberException, NotItemException {
-		
+
 		if (login == null || login.trim().isEmpty()) {
 
 			throw new BadEntryException("login cant be empty");
@@ -220,33 +216,31 @@ public class SocialNetwork implements ISocialNetwork {
 		if (password == null || password.trim().isEmpty() || password.trim().length() < 4) {
 			throw new BadEntryException("password cant be empty or < 4");
 		}
-		
+
 		Member m = new Member(login, password, "test");
 
-		if (m.identifyMember(members, login, password)==false) {
+		if (m.identifyMember(members, login, password) == false) {
 			throw new NotMemberException("Identification manquée");
 		}
-		
+
 		float Mean = 0.0f;
 
 		Review reviewItemBookAdded = new Review(m, title, mark, comment);
 		reviewItemBookAdded.checkParameters();
 		for (ItemBook b : getBooks()) {
-				if (b.sameBook(title)) {
-					LinkedList<Review> reviewList = b.getReviews();
-					for (Review r : reviewList) {
-						if (r.sameLogin(login)) {
-							r.replaceReview(mark, comment);
-							return (b.getMean());
-						}
+			if (b.sameBook(title)) {
+				LinkedList<Review> reviewList = b.getReviews();
+				for (Review r : reviewList) {
+					if (r.sameLogin(login)) {
+						r.replaceReview(mark, comment);
+						return (b.getMean());
 					}
-					b.addReviews(reviewItemBookAdded);
-					return (b.getMean());
-				} else {
-					throw new NotItemException("the Book " + title + " do not existe in the data base please add it.");
 				}
+				b.addReviews(reviewItemBookAdded);
+				return (b.getMean());
+			}
 		}
-		return Mean;
+		throw new NotItemException("the Book " + title + " do not existe in the data base please add it.");
 	}
 
 	@Override
@@ -301,21 +295,20 @@ public class SocialNetwork implements ISocialNetwork {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		 ISocialNetwork sn = new SocialNetwork();
-	     int nbMembers = 100;
-	     int nbBooks = 50;
-	     int nbFilms = 50;
-	     int nbReviews = 200;
+		ISocialNetwork sn = new SocialNetwork();
+		int nbMembers = 100;
+		int nbBooks = 50;
+		int nbFilms = 50;
+		int nbReviews = 200;
 
-	    try {
-            long meantime = Tools.populate(sn, nbMembers, nbBooks, nbFilms, nbReviews);
-            System.out.println("Meantime per operation: " + meantime + " ns");
-        } catch (BadEntryException | MemberAlreadyExistsException | NotMemberException | 
-                 ItemBookAlreadyExistsException | ItemFilmAlreadyExistsException | 
-                 NotItemException e) {
-            e.printStackTrace();
-        }
-		
+		try {
+			long meantime = Tools.populate(sn, nbMembers, nbBooks, nbFilms, nbReviews);
+			System.out.println("Meantime per operation: " + meantime + " ns");
+		} catch (BadEntryException | MemberAlreadyExistsException | NotMemberException | ItemBookAlreadyExistsException
+				| ItemFilmAlreadyExistsException | NotItemException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 }
