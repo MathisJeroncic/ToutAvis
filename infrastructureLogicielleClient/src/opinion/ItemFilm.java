@@ -1,7 +1,5 @@
 package opinion;
 
-import java.util.LinkedList;
-
 import exceptions.BadEntryException;
 
 /**

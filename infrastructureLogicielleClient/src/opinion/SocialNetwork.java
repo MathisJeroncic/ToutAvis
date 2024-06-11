@@ -32,11 +32,17 @@ public class SocialNetwork implements ISocialNetwork {
 	/**
 	 * Adds a new member to the social network.
 	 * 
-	 * @param login    The login of the member to add. Must not be {@code null} or empty.
-	 * @param password The password of the member to add. Must not be {@code null} and must contain at least 4 characters.
+	 * @param login    The login of the member to add. Must not be {@code null} or
+	 *                 empty.
+	 * @param password The password of the member to add. Must not be {@code null}
+	 *                 and must contain at least 4 characters.
 	 * @param profile  The profile of the member to add. Must not be {@code null}.
-	 * @throws BadEntryException            If the login is {@code null}, empty, the password is {@code null}, less than 4 characters, or the profile is {@code null}.
-	 * @throws MemberAlreadyExistsException If a member with the same login already exists in the network.
+	 * @throws BadEntryException            If the login is {@code null}, empty, the
+	 *                                      password is {@code null}, less than 4
+	 *                                      characters, or the profile is
+	 *                                      {@code null}.
+	 * @throws MemberAlreadyExistsException If a member with the same login already
+	 *                                      exists in the network.
 	 */
 	@Override
 	public void addMember(String login, String password, String profile)
@@ -105,16 +111,20 @@ public class SocialNetwork implements ISocialNetwork {
 	/**
 	 * Adds a new film to the social network.
 	 * 
-	 * @param login       The login of the member adding the film. Must not be {@code null} or empty.
-	 * @param password    The password of the member adding the film. Must not be {@code null} and must contain at least 4 characters.
-	 * @param title       The title of the film. Must not be {@code null} or empty.
-	 * @param kind        The genre of the film. Must not be {@code null}.
-	 * @param director    The director of the film. Must not be {@code null}.
+	 * @param login        The login of the member adding the film. Must not be
+	 *                     {@code null} or empty.
+	 * @param password     The password of the member adding the film. Must not be
+	 *                     {@code null} and must contain at least 4 characters.
+	 * @param title        The title of the film. Must not be {@code null} or empty.
+	 * @param kind         The genre of the film. Must not be {@code null}.
+	 * @param director     The director of the film. Must not be {@code null}.
 	 * @param scriptwriter The scriptwriter of the film. Must not be {@code null}.
-	 * @param duration    The duration of the film in minutes.
-	 * @throws BadEntryException             If any of the parameters are invalid.
-	 * @throws NotMemberException            If the member is not found or password is incorrect.
-	 * @throws ItemFilmAlreadyExistsException If a film with the same title already exists in the network.
+	 * @param duration     The duration of the film in minutes.
+	 * @throws BadEntryException              If any of the parameters are invalid.
+	 * @throws NotMemberException             If the member is not found or password
+	 *                                        is incorrect.
+	 * @throws ItemFilmAlreadyExistsException If a film with the same title already
+	 *                                        exists in the network.
 	 */
 	@Override
 	public void addItemFilm(String login, String password, String title, String kind, String director,
@@ -128,16 +138,15 @@ public class SocialNetwork implements ISocialNetwork {
 			throw new BadEntryException("password cant be empty or < 4");
 		}
 
-		boolean identification = false;
 		Member m = new Member(title, password, "test");
 
-		if (m.identifyMember(members, login, password)) {
-			identification = true;
-		} else {
+		if (m.identifyMember(members, login, password) == false) {
 			throw new NotMemberException("Identification manquée");
 		}
 
 		ItemFilm itemFilmToAdd = new ItemFilm(title, kind, director, scriptwriter, duration);
+
+		itemFilmToAdd.checkParameters();
 
 		for (ItemFilm f : itemFilms) {
 			if (itemFilmToAdd.sameFilm(f)) {
@@ -145,24 +154,25 @@ public class SocialNetwork implements ISocialNetwork {
 			}
 		}
 
-		itemFilmToAdd.checkParameters();
-		if (identification == true) {
-			itemFilms.add(itemFilmToAdd);
-		}
+		itemFilms.add(itemFilmToAdd);
 	}
 
 	/**
 	 * Adds a new book to the social network.
 	 * 
-	 * @param login    The login of the member adding the book. Must not be {@code null} or empty.
-	 * @param password The password of the member adding the book. Must not be {@code null} and must contain at least 4 characters.
+	 * @param login    The login of the member adding the book. Must not be
+	 *                 {@code null} or empty.
+	 * @param password The password of the member adding the book. Must not be
+	 *                 {@code null} and must contain at least 4 characters.
 	 * @param title    The title of the book. Must not be {@code null} or empty.
 	 * @param kind     The genre of the book. Must not be {@code null}.
 	 * @param author   The author of the book. Must not be {@code null}.
 	 * @param nbPages  The number of pages in the book.
-	 * @throws BadEntryException             If any of the parameters are invalid.
-	 * @throws NotMemberException            If the member is not found or password is incorrect.
-	 * @throws ItemBookAlreadyExistsException If a book with the same title already exists in the network.
+	 * @throws BadEntryException              If any of the parameters are invalid.
+	 * @throws NotMemberException             If the member is not found or password
+	 *                                        is incorrect.
+	 * @throws ItemBookAlreadyExistsException If a book with the same title already
+	 *                                        exists in the network.
 	 */
 	@Override
 	public void addItemBook(String login, String password, String title, String kind, String author, int nbPages)
@@ -175,16 +185,15 @@ public class SocialNetwork implements ISocialNetwork {
 			throw new BadEntryException("password cant be empty");
 		}
 
-		boolean identification = false;
 		Member m = new Member(title, password, "test");
 
-		if (m.identifyMember(members, login, password)) {
-			identification = true;
-		} else {
+		if (m.identifyMember(members, login, password) == false) {
 			throw new NotMemberException("Identification manquée");
 		}
 
 		ItemBook itemBookToAdd = new ItemBook(title, kind, author, nbPages);
+
+		itemBookToAdd.checkParameters();
 
 		for (ItemBook b : itemBooks) {
 			if (itemBookToAdd.sameBook(b)) {
@@ -192,23 +201,24 @@ public class SocialNetwork implements ISocialNetwork {
 			}
 		}
 
-		itemBookToAdd.checkParameters();
-		if (identification == true) {
-			itemBooks.add(itemBookToAdd);
-		}
+		itemBooks.add(itemBookToAdd);
 	}
 
 	/**
 	 * Adds a review for a film in the social network.
 	 * 
-	 * @param login    The login of the member adding the review. Must not be {@code null} or empty.
-	 * @param password The password of the member adding the review. Must not be {@code null} and must contain at least 4 characters.
-	 * @param title    The title of the film being reviewed. Must not be {@code null} or empty.
+	 * @param login    The login of the member adding the review. Must not be
+	 *                 {@code null} or empty.
+	 * @param password The password of the member adding the review. Must not be
+	 *                 {@code null} and must contain at least 4 characters.
+	 * @param title    The title of the film being reviewed. Must not be
+	 *                 {@code null} or empty.
 	 * @param mark     The mark given to the film. Must be between 0 and 5.
 	 * @param comment  The comment of the review. Must not be {@code null}.
 	 * @return The average mark of the film after adding the review.
-	 * @throws BadEntryException If any of the parameters are invalid.
-	 * @throws NotMemberException If the member is not found or password is incorrect.
+	 * @throws BadEntryException  If any of the parameters are invalid.
+	 * @throws NotMemberException If the member is not found or password is
+	 *                            incorrect.
 	 * @throws NotItemException   If the film is not found in the network.
 	 */
 	@Override
@@ -221,10 +231,10 @@ public class SocialNetwork implements ISocialNetwork {
 		if (password == null || password.trim().isEmpty() || password.trim().length() < 4) {
 			throw new BadEntryException("password cant be empty or < 4");
 		}
-		
+
 		Member m = new Member(title, password, "test");
 
-		if (m.identifyMember(members, login, password)==false) {
+		if (m.identifyMember(members, login, password) == false) {
 			throw new NotMemberException("Identification manquée");
 		}
 		Review reviewItemFilmAdded = new Review(m, title, mark, comment);
@@ -248,14 +258,18 @@ public class SocialNetwork implements ISocialNetwork {
 	/**
 	 * Adds a review for a book in the social network.
 	 * 
-	 * @param login    The login of the member adding the review. Must not be {@code null} or empty.
-	 * @param password The password of the member adding the review. Must not be {@code null} and must contain at least 4 characters.
-	 * @param title    The title of the book being reviewed. Must not be {@code null} or empty.
+	 * @param login    The login of the member adding the review. Must not be
+	 *                 {@code null} or empty.
+	 * @param password The password of the member adding the review. Must not be
+	 *                 {@code null} and must contain at least 4 characters.
+	 * @param title    The title of the book being reviewed. Must not be
+	 *                 {@code null} or empty.
 	 * @param mark     The mark given to the book. Must be between 0 and 5.
 	 * @param comment  The comment of the review. Must not be {@code null}.
 	 * @return The average mark of the book after adding the review.
-	 * @throws BadEntryException If any of the parameters are invalid.
-	 * @throws NotMemberException If the member is not found or password is incorrect.
+	 * @throws BadEntryException  If any of the parameters are invalid.
+	 * @throws NotMemberException If the member is not found or password is
+	 *                            incorrect.
 	 * @throws NotItemException   If the book is not found in the network.
 	 */
 	@Override
@@ -296,7 +310,8 @@ public class SocialNetwork implements ISocialNetwork {
 	/**
 	 * Consults items (books or films) in the social network by title.
 	 * 
-	 * @param title The title of the item to consult. Must not be {@code null} or empty.
+	 * @param title The title of the item to consult. Must not be {@code null} or
+	 *              empty.
 	 * @return A list of strings describing the items found.
 	 * @throws BadEntryException If the title is {@code null} or empty.
 	 */

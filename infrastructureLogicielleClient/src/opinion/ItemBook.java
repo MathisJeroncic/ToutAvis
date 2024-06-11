@@ -1,10 +1,6 @@
 package opinion;
 
-import java.util.LinkedList;
-
 import exceptions.BadEntryException;
-import exceptions.NotItemException;
-import exceptions.NotMemberException;
 
 /**
  * Represents a book item that can be reviewed.
